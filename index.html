@@ -4,6 +4,12 @@
 <!-- saved from url=(0110)file:///C:/Users/syr8ek/Desktop/Kaldaras,%20Mirsa%3B%202307680AM7%3B%202022-5-3%20%2012%3B17%20PM/index250.htm -->
 <html>
 <head>
+<link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js');
+  }
+</script>
 <style>
 body {
   background-color: rgb(90, 120, 80, 0.2);
