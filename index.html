@@ -1,0 +1,1280 @@
+
+
+<!DOCTYPE html>
+<!-- saved from url=(0110)file:///C:/Users/syr8ek/Desktop/Kaldaras,%20Mirsa%3B%202307680AM7%3B%202022-5-3%20%2012%3B17%20PM/index250.htm -->
+<html>
+<head>
+<style>
+body {
+  background-color: rgb(90, 120, 80, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea, input[type=number] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 6px 6px 6px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 3px 3px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+input.highlight {
+  background-color: #fffacd;
+  border: 1px solid #aaa;
+}
+
+#cineSection label, #tekstSection label {
+  font-size: 10px;
+  color: #555;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 6px 2px 0;
+}
+
+.container {
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  padding: 3px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.col-25 {
+  flex: 25%;
+  padding: 0 8px;
+}
+
+.container2 {
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  padding: 3px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5px;
+}
+
+.col-50 {
+  flex: 50%;
+  padding: 0 8px;
+}
+
+
+button {
+            padding: 3px 30px;
+            background-color: light-gray;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.4s;
+        }
+        button:hover {
+            background-color: gray; /* Light green */
+        }
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+  .col-50, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+.collapsible {
+  background-color: rgb(90, 120, 80, 0.2);
+  color: #000;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 13px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: rgb(90, 120, 80, 0.2);;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: rgb(90, 120, 80, 0.2);
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<h1 
+ id="headline">Hjerte-MR-skabelon &#129522 -Beta </h1>
+    <input type="text" id="nameInput" placeholder="Id dokument">
+    <button onclick="updateTitle()">Opdater</button>
+
+
+
+
+<button type="button" class="collapsible">I. Sektion målinger</button>
+<div class="content">
+
+<h2>Indtast målinger og data</h2>
+
+<div id="measureDiv">
+  <div class="row">
+   <div class="col-25">
+   <input type="number" id="num1" placeholder="Alder" class="highlight">
+     </div>
+   <div class="col-25">
+   <select id="sex">
+     <option value="M">Mand</option>
+     <option value="F">Kvinde</option>
+   </select>
+     </div>
+   <div class="col-25">
+<input type="number" id="num2" placeholder="Højde i cm (H)" class="highlight">
+     </div>
+   
+
+   <div class="col-25"> 
+<input type="number" id="num3" placeholder="Vægt i kg (V)" class="highlight">
+     </div>
+   <div class="col-25">
+<input type="number" id="num4" placeholder="HR" style="width:80px;" class="highlight"><br><br>
+     </div>
+       </div>
+  <div class="row">
+   <div class="col-25">
+<input type="number" id="num5" placeholder="Aortarod(Sinus) i mm">
+     </div>
+   <div class="col-25">
+<input type="number" id="num6" placeholder="VA 4K cm2"><br><br>
+     </div>
+   <div class="col-25">
+<input type="number" id="num7" placeholder="VA 2K cm2">
+     </div>
+   <div class="col-25">
+<input type="number" id="num8" placeholder="Længde VA cm"><br><br>
+     </div>
+   </div>
+   
+  
+  <div class="row">
+   <div class="col-25">
+<input type="number" id="num9" placeholder="LVID i mm" class="highlight">
+     </div>
+   <div class="col-25">
+<input type="number" id="num10" placeholder="LVIS i mm" class="highlight"><br><br>
+     </div>
+     <div class="col-25">
+<input type="number" id="num11" placeholder="IVD i mm" class="highlight">
+     </div>
+         <div class="col-25">
+<input type="number" id="num12" placeholder="RVID i mm"><br><br>
+     </div>
+    </div>
+  <div class="row">
+   <div class="col-25">
+<input type="number" id="num13" placeholder="EDV ml" class="highlight">
+     </div>
+   <div class="col-25">
+<input type="number" id="num14" placeholder="ESV ml" class="highlight"><br><br>
+     </div>
+     <div class="col-25">
+<input type="number" id="num15" placeholder="RV-EDV vol ml">
+     </div>
+   <div class="col-25">
+<input type="number" id="num16" placeholder="RV-ESV vol ml"><br><br>
+     </div>
+    </div>
+    <div class="row">
+   <div class="col-25">
+<input type="number" id="num17" placeholder="LV masse" class="highlight">
+    </div>
+   <div class="col-25">
+<input type="number" id="num18" placeholder="AO-VENC"><br><br>
+     </div>
+      <div class="col-25"> 
+<input type="number" id="num19" placeholder="AO-Qflow-forward(SV)" class="highlight">
+     </div>
+   <div class="col-25">
+<input type="number" id="num20" placeholder="AO-Qflow-Rev-flow" class="highlight"><br><br>
+     </div>
+       </div>
+  <div class="row">
+   <div class="col-25">
+<input type="number" id="num21" placeholder="TP-VENC">
+     </div>
+   <div class="col-25">
+ <input type="number" id="num22" placeholder="Indtast TP-fasekontrast F-flow" class="highlight"><br><br>
+     </div>
+   <div class="col-25">
+<input type="number" id="num23" placeholder="Indtast TP-fasekontrast Rev-flow" class="highlight">
+     </div>
+   <div class="col-25">
+<input type="number" id="num24" placeholder="Indtast Puls-fasekontrast" class="highlight"><br><br>
+     </div>
+   </div>
+     <div class="row">
+   <div class="col-25">
+<input type="number" id="num25" placeholder="T1 nativ">
+     </div>
+   <div class="col-25">
+<input type="number" id="num26" placeholder="T2 nativ"><br><br>
+     </div>
+   <div class="col-25">
+<input type="number" id="num27" placeholder="T1*">
+     </div>
+   <div class="col-25">
+<input type="number" id="num28" placeholder="Hæmatokrit"><br><br>
+     </div>
+   </div>
+        <div class="row">
+   <div class="col-25">
+<input type="number" id="num29" placeholder="T1 nativ blod">
+     </div>
+   <div class="col-25">
+<input type="number" id="num30" placeholder="T1* blod"><br><br>
+     </div>
+     </div>
+   
+    
+</div> <br>
+
+</div><br><br>
+
+<button type="button" class="collapsible">II. Sektion CINE/SSFP</button>
+<div class="content" id="cineSection">
+
+
+<h2>CINE - Funktion:  </h2>
+
+
+  <div class="row">
+   <div class="col-50">
+    <label>Aortaroden på sinusniveau:</label>
+    <select id="select1">
+        <option value="Aorta(Sinus): Norm. dimensioneret">Norm. dimensioneret</option>
+        <option value="Aorta(Sinus): Let dilateret">Let dilateret</option>
+        <option value="Aorta(Sinus): Moderat dilateret">Moderat dilateret</option>
+        <option value="Aorta(Sinus): Svært dilateret">Svært dilateret</option>
+    </select>
+
+</div>
+<div class="col-50">
+
+    <label>Aortaklap/morfologi:</label>
+    <select id="select2">
+        <option value="Tricuspid aortaklap">Tricuspid aortaklap</option>
+        <option value="Bicuspid aortaklap">Bicuspid aortaklap</option>
+        <option value="Funktionelt bicuspid aortaklap">Funktionelt bicuspid</option>
+        <option value="Fastsiddende aortaklapprotese">Protese velfung.</option>
+    </select><br><br>
+</div>
+</div>
+
+<div class="row">    
+<div class="col-50">
+     <label>Åbningsamplitude:</label>
+    <select id="select3">
+        <option value="Normal åbningsamplitude">Normal</option>
+        <option value="Let nedsat åbning">Let nedsat</option>
+        <option value="Moderat nedsat åbning">Moderat nedsat</option>
+        <option value="Svært nedsat åbning">Svært nedsat</option>
+    </select><br><br>
+</div>   
+<div class="col-50">
+    <label>Aorta insufficiens:</label>
+    <select id="select4">
+        <option value="Ingen aortainsufficiens">Ingen AI</option>
+        <option value="Let aortainsufficiens">Let aortainsufficiens</option>
+        <option value="Moderat aortainsufficiens">Moderat aortainsufficiens</option>
+        <option value="Svær aortainsufficiens">Svært aortainssuffiens</option>
+     </select><br><br>
+
+</div>
+</div>
+
+<div class="row"> 
+<div class="col-50">
+    <label>Mitralklappen:</label>
+    <select id="select5">
+    	<option value="Ingen mitralinsufficiens">Ingen mitralinsufficiens</option>
+        <option value="Let insufficient mitralklap">Let insufficiens</option>
+        <option value="Moderat insufficient mitralklap">Moderat insufficiens</option>
+        <option value="Svær insufficient mitralklap">Svær insufficiens</option>
+        
+        
+    </select><br><br>
+</div>
+<div class="col-50">
+
+    <label>Mitral morfologi:</label>
+    <select id="select6">
+        <option value="Mitralen morfologisk intakt, gracile flige, normal åbning">Gracile flige, ingen prolaps</option>
+        <option value="Mitralen med prolaps forreste flig.">Prolaps forreste flig</option>
+        <option value="Mitralen med prolaps af bagre flig">Prolaps af bagre flig</option>
+        <option value="Mitralringscalcifikation uden betydning stenose.">Mitralrings calc</option>
+        <option value="Fastsiddende mitralkprotese">Mitralprotese</option>
+    </select><br><br>
+
+</div>
+</div>
+
+<div class="row"> 
+<div class="col-50">
+    <label>Venstre atrium:</label>
+    <select id="select7">
+        <option value="Venstre atrium: Norm. dimensioneret">Norm. dimen. </option>
+        <option value="Venstre atrium: Let dilateret">Let dilat.  </option>
+        <option value="Venstre atrium: Moderat dilateret">Moderat dilat.</option>
+        <option value="Venstre atrium: Svært dilateret">Svært dilat. </option>
+    </select><br><br>
+</div>
+ 
+ <div class="col-50">
+    <label>Venstre ventrikel str:</label>
+    <select id="select8">
+        <option value="Normal stor venstre ventrikel">Normal stor LV </option>
+        <option value="Let dilateret venstre ventrikel">Let dilat. LV  ml</option>
+        <option value="Moderat dilateretvenstre ventrikel">Moderat dilat.</option>
+        <option value="Svært dilateret venstre ventrikel">Svært dilat. LV</option>
+    </select><br><br>
+
+</div>
+</div>
+
+<div class="row"> 
+<div class="col-50">
+    <label>Systolisk funktion af venstre ventrikel:</label>
+    <select id="select9">
+        <option value="Normal systolisk funktion">Norm. syst. funktion.</option>
+        <option value="Hyperdynamisk fungerende cor">Hyperdyn cor. </option>
+        <option value="Let nedsat systolisk funktion">Let nedsat syst. funktion</option>
+        <option value="Moderat nedsat systolisk funktion">Moderat nedsat funkt</option>
+        <option value="Svært nedsat systolisk funktion">Svært nedsat funkt</option>
+    </select><br><br>
+ </div>
+ <div class="col-50">
+     <label>Størrelse højre ventrikel:</label>
+    <select id="select10">
+        <option value="Normal stor højre ventrikel">Norm. stor RV</option>
+        <option value="Let dilateret højre ventrikel">Let dilat. RV</option>
+        <option value="Moderat dilateret højre ventrikel">Moderat dilat. RV</option>
+        <option value="Svært dilateret højre ventrikel">Svært dilat. RV</option>
+    </select><br><br>
+  </div>
+  </div>
+<div class="row"> 
+<div class="col-50">
+        <label>Funktion af højre ventrikel:</label>
+    <select id="select11">
+        <option value="Normal funktion højre ventrikel">Norm. syst. funktion.</option>
+        <option value="Let nedsatfunktion højre ventrikel">Norm. syst. funktion.</option>
+        <option value="Moderat nedsat funktion højre ventrikel">Norm. syst. funktion.</option>        
+        <option value="Svært nedsat RV funktion">Svært nedsat funkt</option>
+    </select><br><br>
+  </div>
+   
+   <div class="col-50">
+            <label>Tricuspedalklappen:</label>
+    <select id="select12">
+        <option value="Let tricuspedalinsufficiens">Let tricuspedalinsufficiens</option>
+        <option value="Moderat tricuspedalinsufficiens">Moderat triuspedalinsufficines</option>
+        <option value="Svært tricuspedalinsufficiens">Svært tricuspedalinsufficiens</option>
+    </select><br><br>
+</div>
+</div>
+ 
+    <label>Vena cava inferior:</label>
+    <select id="select13"> 
+        <option value="Ingen dilatation af vena cava inferior med resp.kollaps">VC normal</option>
+        <option value="Let dilateret VC inf. let nedsat kollaps resp">Let dilateret VC</option>
+        <option value="Moderat dilateret VC inferior. Nedsat resp. kollaps">Moderat dilat VC</option>
+        <option value="Svært dilateret VC inferior.Nedsat resp. kollaps">Svært dilateret VC</option>
+    </select><br>
+    
+</div><br><br>
+
+<button type="button" class="collapsible">III. Øvrige modaliteter</button>
+<div class="content" id="tekstSection">
+
+<h2> Supplerende tekst </h2>
+
+<label for="myText11">Hvileperfusion</label>
+<input type="text" id="myText11" placeholder="Normal hvileperfusion basalt, midt og apikalt.">
+<label for="myText12">Stressperfusion</label>
+<input type="text" id="myText12" placeholder="Regadenoson 400 mikrogram. Forventelig pulsstigning over 20 %, samt bivirkninger.">
+<label for="myText13">Fasekontrast</label>
+<input type="text" id="myText13" placeholder="Pæne fysiologisk udseende flowkurver. Ingen aliasering. Korrekt beat ud fra gating.">
+<label for="myText14">Mapping</label>
+<input type="text" id="myText14" placeholder="Nativ T1 værdi normal.">
+<label for="myText15">Andet</label>
+<input type="text" id="myText15" placeholder="">
+<label for="myText16">LGE</label>
+<input type="text" id="myText16" placeholder="Ingen sen opladning i shortaxis eller apikale projektioner.">
+<label for="myText17">Konklusion</label>
+<input type="text" id="myText17" placeholder="">
+
+
+
+
+
+</div><br><br>
+
+
+ <button id="activateBtn">Activate ASCII Art</button>
+ <button onclick="openRefPopup()">Open ASCII Reference</button>
+
+
+<p>.-. .- ... -- ..- ... &#129339.- .-.. -... .. -. .. ..- ... ... . -.         </p>
+
+<button type="button" class="collapsible">MR-hjerte-rapport</button>
+<div class="content">
+
+     <div>      
+            
+        <button class="copyButton">Kopier tekst nedenfor</button>
+        <p class="textToCopy">
+        
+        <div id="output20"></div><br>
+        <div id="output44"></div><br>
+        <div id="output66"></div>
+     </div>
+
+</div>
+     
+      <script>
+      
+              function updateTitle() {
+            const userInput = document.getElementById("nameInput").value.trim();
+            if (userInput) {
+                document.title = `MR.${userInput}.html`;  // Updates the browser tab title
+                document.getElementById("headline").innerText = `MR.${userInput}.html`; // Updates heading in page
+            }
+        }
+        
+        var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+      
+              
+        // Reference table: SCMR 2025
+        // Structure: sex -> ageBracket -> parameter -> [LL, UL]
+        const refTable = {
+            M: {
+                20: {
+                    lvedv:[85,225], lvedvi:[48,108], lvesv:[20,93], lvesvi:[11,44],
+                    lvef:[50,78], lvsv:[47,149], svi:[28,72], lvm:[82,177], lvmi:[47,91],
+                    co:[2.7,9.7], ci:[1.9,4.4],
+                    rvedv:[93,254], rvedvi:[56,129], rvesv:[20,147], rvesvi:[12,73],
+                    rvsv:[27,160], rvef:[27,78]
+                },
+                30: {
+                    lvedv:[86,205], lvedvi:[48,98], lvesv:[22,79], lvesvi:[12,38],
+                    lvef:[54,77], lvsv:[51,135], svi:[30,65], lvm:[81,169], lvmi:[45,86],
+                    co:[2.2,9.6], ci:[1.9,4.4],
+                    rvedv:[81,230], rvedvi:[50,111], rvesv:[29,113], rvesvi:[18,55],
+                    rvsv:[36,133], rvef:[41,69]
+                },
+                40: {
+                    lvedv:[81,207], lvedvi:[46,101], lvesv:[18,84], lvesvi:[10,41],
+                    lvef:[52,79], lvsv:[51,137], svi:[30,67], lvm:[79,170], lvmi:[42,86],
+                    co:[2.2,9.3], ci:[1.9,4.4],
+                    rvedv:[70,231], rvedvi:[45,114], rvesv:[21,111], rvesvi:[14,55],
+                    rvsv:[28,141], rvef:[41,72]
+                },
+                50: {
+                    lvedv:[72,203], lvedvi:[41,99], lvesv:[15,80], lvesvi:[9,40],
+                    lvef:[53,78], lvsv:[46,135], svi:[27,66], lvm:[76,171], lvmi:[43,84],
+                    co:[2.3,8.6], ci:[1.9,4.4],
+                    rvedv:[67,225], rvedvi:[42,112], rvesv:[19,107], rvesvi:[12,55],
+                    rvsv:[35,135], rvef:[44,71]
+                },
+                60: {
+                    lvedv:[65,198], lvedvi:[39,98], lvesv:[11,77], lvesvi:[7,39],
+                    lvef:[53,81], lvsv:[45,129], svi:[27,64], lvm:[75,172], lvmi:[42,86],
+                    co:[2.4,8.2], ci:[1.9,4.4],
+                    rvedv:[50,214], rvedvi:[38,105], rvesv:[14,93], rvesvi:[12,46],
+                    rvsv:[27,130], rvef:[48,72]
+                },
+                70: {
+                    lvedv:[81,183], lvedvi:[44,95], lvesv:[19,74], lvesvi:[10,38],
+                    lvef:[52,79], lvsv:[52,126], svi:[28,64], lvm:[65,176], lvmi:[37,86],
+                    co:[3.3,7.8], ci:[1.9,4.4],
+                    rvedv:[101,214], rvedvi:[52,106], rvesv:[34,94], rvesvi:[18,47],
+                    rvsv:[56,130], rvef:[48,71]
+                }
+            },
+            F: {
+                20: {
+                    lvedv:[73,172], lvedvi:[48,95], lvesv:[20,67], lvesvi:[12,36],
+                    lvef:[54,78], lvsv:[45,115], svi:[32,64], lvm:[54,119], lvmi:[36,72],
+                    co:[2.6,7.6], ci:[1.8,4.2],
+                    rvedv:[72,176], rvedvi:[51,102], rvesv:[17,97], rvesvi:[11,55],
+                    rvsv:[33,106], rvef:[35,76]
+                },
+                30: {
+                    lvedv:[71,162], lvedvi:[46,92], lvesv:[14,65], lvesvi:[8,38],
+                    lvef:[54,80], lvsv:[42,111], svi:[29,62], lvm:[51,118], lvmi:[35,70],
+                    co:[2.5,7.8], ci:[1.8,4.2],
+                    rvedv:[68,166], rvedvi:[47,100], rvesv:[13,86], rvesvi:[9,53],
+                    rvsv:[24,114], rvef:[35,80]
+                },
+                40: {
+                    lvedv:[68,162], lvedvi:[46,89], lvesv:[15,62], lvesvi:[10,34],
+                    lvef:[55,79], lvsv:[46,109], svi:[31,61], lvm:[47,123], lvmi:[31,73],
+                    co:[2.4,7.5], ci:[1.8,4.2],
+                    rvedv:[63,175], rvedvi:[45,97], rvesv:[17,78], rvesvi:[12,45],
+                    rvsv:[36,111], rvef:[47,75]
+                },
+                50: {
+                    lvedv:[64,155], lvedvi:[41,86], lvesv:[13,58], lvesvi:[8,33],
+                    lvef:[55,81], lvsv:[44,106], svi:[29,59], lvm:[54,124], lvmi:[32,72],
+                    co:[2.4,7.1], ci:[1.8,4.2],
+                    rvedv:[54,167], rvedvi:[41,91], rvesv:[14,73], rvesvi:[11,41],
+                    rvsv:[30,108], rvef:[49,75]
+                },
+                60: {
+                    lvedv:[59,151], lvedvi:[40,84], lvesv:[9,56], lvesvi:[7,31],
+                    lvef:[56,83], lvsv:[43,102], svi:[28,57], lvm:[52,129], lvmi:[33,75],
+                    co:[2.6,6.7], ci:[1.8,4.2],
+                    rvedv:[54,164], rvedvi:[41,90], rvesv:[12,68], rvesvi:[10,38],
+                    rvsv:[35,103], rvef:[51,77]
+                },
+                70: {
+                    lvedv:[68,142], lvedvi:[42,82], lvesv:[15,55], lvesvi:[9,31],
+                    lvef:[56,81], lvsv:[45,100], svi:[28,57], lvm:[44,133], lvmi:[29,74],
+                    co:[2.8,6.6], ci:[1.8,4.2],
+                    rvedv:[77,162], rvedvi:[47,90], rvesv:[22,65], rvesvi:[14,36],
+                    rvsv:[47,104], rvef:[53,75]
+                }
+            }
+        };
+
+        function getRef(sex, age, param) {
+            const brackets = [20,30,40,50,60,70];
+            let bracket = 20;
+            for (let b of brackets) {
+                if (age >= b) bracket = b;
+            }
+            const r = refTable[sex] && refTable[sex][bracket] && refTable[sex][bracket][param];
+            if (r) return ` [Ref: ${r[0]}-${r[1]}]`;
+            return '';
+        }
+
+        function handleSubmit() {
+
+            var sex = document.getElementById('sex').value;
+            var num1 = parseFloat(document.getElementById('num1').value);
+            var num2 = parseFloat(document.getElementById('num2').value);
+            var num3 = parseFloat(document.getElementById('num3').value);
+            var num4 = parseFloat(document.getElementById('num4').value);
+            var num5 = parseFloat(document.getElementById('num5').value);
+            var num6 = parseFloat(document.getElementById('num6').value);
+            var num7 = parseFloat(document.getElementById('num7').value);
+            var num8 = parseFloat(document.getElementById('num8').value);
+            var num9 = parseFloat(document.getElementById('num9').value);
+            var num10 = parseFloat(document.getElementById('num10').value);
+            var num11 = parseFloat(document.getElementById('num11').value);
+            var num12 = parseFloat(document.getElementById('num12').value);
+            var num13 = parseFloat(document.getElementById('num13').value);
+            var num14 = parseFloat(document.getElementById('num14').value);
+            var num15 = parseFloat(document.getElementById('num15').value);
+            var num16 = parseFloat(document.getElementById('num16').value);
+            var num17 = parseFloat(document.getElementById('num17').value);
+            var num18 = parseFloat(document.getElementById('num18').value);
+            var num19 = parseFloat(document.getElementById('num19').value);
+            var num20 = parseFloat(document.getElementById('num20').value);
+            var num21 = parseFloat(document.getElementById('num21').value);
+            var num22 = parseFloat(document.getElementById('num22').value);
+            var num23 = parseFloat(document.getElementById('num23').value);
+            var num24 = parseFloat(document.getElementById('num24').value);
+            var num25 = parseFloat(document.getElementById('num25').value);
+            var num26 = parseFloat(document.getElementById('num26').value);
+            var num27 = parseFloat(document.getElementById('num27').value);
+            var num28 = parseFloat(document.getElementById('num28').value);
+            var num29 = parseFloat(document.getElementById('num29').value);
+            var num30 = parseFloat(document.getElementById('num30').value);
+            
+            
+            var BSA = Math.sqrt((num2*num3) / 3600).toFixed(2);
+            var AOs =(num5/BSA).toFixed(1);
+            var VA =((0.85*num6*num7)/num8).toFixed(1);
+            var VAi =(VA/BSA).toFixed(1);
+            var LVIDi =(num9/BSA).toFixed(1);
+            var LVISi =(num10/BSA).toFixed(1);
+            var LVDvoli=(num13/BSA).toFixed(1);
+            var LVSvoli=(num14/BSA).toFixed(1);
+            
+            var RVDvoli=(num15/BSA).toFixed(1);
+            var RVSvoli=(num16/BSA).toFixed(1);
+            
+            var LVEF =(100*(num13-num14)/num13).toFixed(1);
+            var SV =(num13-num14).toFixed(1);
+            var SVI =(SV/BSA).toFixed(1);
+            var CO =((num13-num14)/1000*num4).toFixed(1);
+            var CI =(CO/BSA).toFixed(1);
+            var RVEF =(100*(num15-num16)/num15).toFixed(1);
+            var SVrv =(num15-num16).toFixed(1);
+            var SVIrv =((num15-num16)/BSA).toFixed(1);
+            var COrv =((SVrv*num4)/1000).toFixed(1);
+            var CIrv =(((SVrv*num4)/1000)/BSA).toFixed(1);
+            var Q =((num22-num23)/(num19-num20)).toFixed(1);
+            var Qn =(num19-num20).toFixed(1);
+            var Qco =(((num19-num20)*num24)/1000).toFixed(1);
+            var Qpn =(num22-num23).toFixed(1);
+            var Qpco =(((num22-num23)*num24)/1000).toFixed(1);
+            var Mi =(num17/BSA).toFixed(1);
+            
+            
+            var RFv=(100*(num20/num19)).toFixed(1);
+            var RFh=(100*(num23/num22)).toFixed(1);
+            
+            var ECV=((1-num28)*(1/num27-1/num25)/(1/num30-1/num29)).toFixed(2);
+                  
+            // LV Diameter refs (sex-specific, not age-dependent)
+            const lvdRef = sex === 'M'
+                ? { lvid:'[Ref: 44-61]', lvis:'[Ref: 28-40]', lvidi:'[Ref: 20-32]', lvisi:'[Ref: 13-21]' }
+                : { lvid:'[Ref: 40-56]', lvis:'[Ref: 23-39]', lvidi:'[Ref: 24-40]', lvisi:'[Ref: 9-25]' };
+            const laRef  = sex === 'M' ? '[Ref: 40-111]' : '[Ref: 38-93]';
+            const laRefI = '[Ref: 25-56]';
+
+            var outputText = "MÅLINGER (Ref. SCMR2025) OG BIOMETRISKE DATA<br><br>";
+            if (!isNaN(num1)) outputText += `Alder: ${num1} år.<br>`;
+            if (!isNaN(num2)) outputText += `Højde: ${num2} cm.<br>`;
+            if (!isNaN(num3)) outputText += `Vægt: ${num3} kg.<br>`;
+            if (!isNaN(num4)) outputText += `Puls: ${num4}.<br>`;
+            if (!isNaN(BSA))  outputText += `BSA: ${BSA} m2.<br><br>`;
+
+            if (!isNaN(num5))  outputText += `Aorta(s): ${num5} mm.<br>`;
+            if (!isNaN(num6))  outputText += `LA area (4k): ${num6} cm2.<br>`;
+            if (!isNaN(num7))  outputText += `LA area (2k): ${num7} cm2.<br>`;
+            if (!isNaN(VA))    outputText += `LA vol: ${VA} ml ${laRef}.<br>`;
+            if (!isNaN(VAi))   outputText += `LA vol*: ${VAi} ml/m2 ${laRefI}.<br><br>`;
+
+            if (!isNaN(num9))  outputText += `LVID: ${num9} mm ${lvdRef.lvid}.<br>`;
+            if (!isNaN(LVIDi)) outputText += `LVID*: ${LVIDi} mm/m2 ${lvdRef.lvidi}.<br>`;
+            if (!isNaN(num10)) outputText += `LVIS: ${num10} mm ${lvdRef.lvis}.<br>`;
+            if (!isNaN(LVISi)) outputText += `LVIS*: ${LVISi} mm/m2 ${lvdRef.lvisi}.<br>`;
+            if (!isNaN(num11)) outputText += `IVD: ${num11} mm [Ref: <13].<br>`;
+            if (!isNaN(num12)) outputText += `RVID: ${num12} mm.<br><br>`;
+
+            if (!isNaN(num13))   outputText += `EDV: ${num13} ml ${getRef(sex,num1,'lvedv')}.<br>`;
+            if (!isNaN(LVDvoli)) outputText += `EDV*: ${LVDvoli} ml/m2 ${getRef(sex,num1,'lvedvi')}.<br>`;
+            if (!isNaN(num14))   outputText += `ESV: ${num14} ml ${getRef(sex,num1,'lvesv')}.<br>`;
+            if (!isNaN(LVSvoli)) outputText += `ESV*: ${LVSvoli} ml/m2 ${getRef(sex,num1,'lvesvi')}.<br>`;
+            if (!isNaN(LVEF))    outputText += `LVEF: ${LVEF} % ${getRef(sex,num1,'lvef')}.<br>`;
+            if (!isNaN(SV))      outputText += `SV: ${SV} ml ${getRef(sex,num1,'lvsv')}.<br>`;
+            if (!isNaN(SVI))     outputText += `SVI: ${SVI} ml/m2 ${getRef(sex,num1,'svi')}.<br>`;
+            if (!isNaN(CO))      outputText += `CO: ${CO} l/min ${getRef(sex,num1,'co')}.<br>`;
+            if (!isNaN(CI))      outputText += `CI: ${CI} l/min/m2 ${getRef(sex,num1,'ci')}.<br>`;
+            if (!isNaN(num17))   outputText += `LVma: ${num17} gram.<br>`;
+            if (!isNaN(Mi))      outputText += `LVma*: ${Mi} g/m2 ${getRef(sex,num1,'lvmi')}.<br><br>`;
+
+            if (!isNaN(num15))   outputText += `RV-EDV: ${num15} ml ${getRef(sex,num1,'rvedv')}.<br>`;
+            if (!isNaN(RVDvoli)) outputText += `RV-EDV*: ${RVDvoli} ml/m2 ${getRef(sex,num1,'rvedvi')}.<br>`;
+            if (!isNaN(num16))   outputText += `RV-ESV: ${num16} ml ${getRef(sex,num1,'rvesv')}.<br>`;
+            if (!isNaN(RVSvoli)) outputText += `RV-ESV*: ${RVSvoli} ml/m2 ${getRef(sex,num1,'rvesvi')}.<br>`;
+            if (!isNaN(RVEF))    outputText += `RVEF: ${RVEF} % ${getRef(sex,num1,'rvef')}.<br>`;
+            if (!isNaN(SVrv))    outputText += `SVrv: ${SVrv} ml ${getRef(sex,num1,'rvsv')}.<br>`;
+            if (!isNaN(SVIrv))   outputText += `SVI-RV: ${SVIrv} ml/m2.<br>`;
+            if (!isNaN(COrv))    outputText += `CO-RV: ${COrv} l/min.<br>`;
+            if (!isNaN(CIrv))    outputText += `CI-RV: ${CIrv} l/min/m2.<br><br>`;
+
+            if (!isNaN(num18)) outputText += `AOvenc: ${num18}.<br>`;
+            if (!isNaN(num19)) outputText += `AO-Qflow forward: ${num19} ml.<br>`;
+            if (!isNaN(num20)) outputText += `AO-Qflow reverse: ${num20} ml.<br>`;
+            if (!isNaN(Qn))    outputText += `AO-Qflow net: ${Qn} ml.<br>`;
+            if (!isNaN(Qco))   outputText += `AO-Qflow net CO: ${Qco} L/min.<br>`;
+            if (!isNaN(RFv))   outputText += `RF A-klap: ${RFv}%.<br><br>`;
+
+            if (!isNaN(num21)) outputText += `TPvenc: ${num21}.<br>`;
+            if (!isNaN(num22)) outputText += `TP-Qflow forward: ${num22} ml.<br>`;
+            if (!isNaN(num23)) outputText += `TP-Qflow reverse: ${num23} ml.<br>`;
+            if (!isNaN(Qpn))   outputText += `TP-Qflow net: ${Qpn} ml.<br>`;
+            if (!isNaN(Qpco))  outputText += `TP-Qflow net CO: ${Qpco} L/min.<br>`;
+            if (!isNaN(RFh))   outputText += `RF P-klap: ${RFh}%.<br>`;
+            if (!isNaN(Q))     outputText += `Shunt Qp:Qs: ${Q}.<br>`;
+            if (!isNaN(num24)) outputText += `Puls Qflow: ${num24}.<br><br>`;
+
+            if (!isNaN(num25)) outputText += `T1 nativ: ${num25}.<br>`;
+            if (!isNaN(num26)) outputText += `T2 nativ: ${num26}.<br>`;
+            if (!isNaN(num27)) outputText += `T1*: ${num27}.<br>`;
+            if (!isNaN(num28)) outputText += `Hæmatokrit: ${num28}.<br>`;
+            if (!isNaN(num29)) outputText += `T1 blod nativ: ${num29}.<br>`;
+            if (!isNaN(num30)) outputText += `T1 blod*: ${num30}.<br>`;
+            if (!isNaN(ECV))   outputText += `ECV: ${ECV}.<br>`;
+
+            // Handle no valid inputs
+            if (!outputText) {
+                outputText = "No valid inputs found!";
+            }
+
+            // Display the output
+            document.getElementById('output20').innerHTML = outputText;
+        }
+        
+    // Auto-update measurements output on any number input or sex change
+    ['num1','num2','num3','num4','num5','num6','num7','num8','num9','num10',
+     'num11','num12','num13','num14','num15','num16','num17','num18','num19','num20',
+     'num21','num22','num23','num24','num25','num26','num27','num28','num29','num30','sex']
+    .forEach(id => document.getElementById(id).addEventListener('input', handleSubmit));
+    document.getElementById('sex').addEventListener('change', handleSubmit);
+
+    function updateCINE() {
+        const selectedValue1  = document.getElementById('select1').value;
+        const selectedValue2  = document.getElementById('select2').value;
+        const selectedValue3  = document.getElementById('select3').value;
+        const selectedValue4  = document.getElementById('select4').value;
+        const selectedValue5  = document.getElementById('select5').value;
+        const selectedValue6  = document.getElementById('select6').value;
+        const selectedValue7  = document.getElementById('select7').value;
+        const selectedValue8  = document.getElementById('select8').value;
+        const selectedValue9  = document.getElementById('select9').value;
+        const selectedValue10 = document.getElementById('select10').value;
+        const selectedValue11 = document.getElementById('select11').value;
+        const selectedValue12 = document.getElementById('select12').value;
+        const selectedValue13 = document.getElementById('select13').value;
+        document.getElementById('output44').innerHTML =
+            `CINE/SSFP:<br>Situs solitus. ${selectedValue1}. ${selectedValue2}.<br>${selectedValue3}.${selectedValue4}.<br>${selectedValue5}.${selectedValue6}<br>${selectedValue7}.<br>${selectedValue8}.${selectedValue9}.<br>${selectedValue10}.${selectedValue11}.${selectedValue12}.<br>${selectedValue13}.<br>Ingen perikardieeksudat.`;
+    }
+
+    function updateSupp() {
+        const fields = [
+            {id: "myText11", heading: "HVILEPERFUSION:", ph: "Normal hvileperfusion basalt, midt og apikalt."},
+            {id: "myText12", heading: "STRESSPERFUSION:", ph: "Regadenoson 400 mikrogram. Forventelig pulsstigning over 20 %, samt bivirkninger."},
+            {id: "myText13", heading: "FASEKONTRAST:", ph: "Pæne fysiologisk udseende flowkurver. Ingen aliasering. Korrekt beat ud fra gating."},
+            {id: "myText14", heading: "MAPPING:", ph: "Nativ T1 værdi normal."},
+            {id: "myText15", heading: "ANDET:", ph: ""},
+            {id: "myText16", heading: "LGE:", ph: "Ingen sen opladning i shortaxis eller apikale projektioner."},
+            {id: "myText17", heading: "KONKLUSION:", ph: ""}
+        ];
+        let out = '';
+        fields.forEach(f => {
+            const val = document.getElementById(f.id).value || f.ph;
+            out += `<br>${f.heading}<br>${val}<br>`;
+        });
+        out += `<br>MR modaliteterne er ikke opført i kronologisk rækkefølge.`;
+        document.getElementById("output66").innerHTML = out;
+    }
+
+    ['select1','select2','select3','select4','select5','select6',
+     'select7','select8','select9','select10','select11','select12','select13']
+    .forEach(id => document.getElementById(id).addEventListener('change', updateCINE));
+
+    ['myText11','myText12','myText13','myText14','myText15','myText16','myText17']
+    .forEach(id => document.getElementById(id).addEventListener('input', updateSupp));
+
+    updateCINE();
+    updateSupp();
+
+ 
+
+        // Add event listeners to all copy buttons
+        document.querySelectorAll('.copyButton').forEach(function(button, index) {
+            button.addEventListener('click', function() {
+                // Find the text to copy (next sibling element)
+                const textToCopy = button.nextElementSibling.innerText;
+
+                // Create a temporary textarea element to hold the text
+                const tempTextarea = document.createElement('textarea');
+                tempTextarea.value = textToCopy;
+                document.body.appendChild(tempTextarea);
+
+                // Select the text in the textarea
+                tempTextarea.select();
+                tempTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+                // Copy the text to the clipboard
+                document.execCommand('copy');
+
+                // Remove the temporary textarea
+                document.body.removeChild(tempTextarea);
+
+                // Optionally, provide feedback to the user
+                alert('Text copied to clipboard: ' + textToCopy);
+            });
+        });
+        
+        
+        function openRefPopup() {
+  const asciiText = `
+================================================================================
+
+
+| PARAMETER | LL    | UL    | DESCRIPTION                           |
+================================================================================
+
+[ MEN - LEFT VENTRICLE ]
+
+--- MALE AGE 20 LV ---
+
+
+| lvedvi    | 48    | 108   | LV EDV * (mL/m2)                      |
+| lvesvi    | 11    | 44    | LV ESV * (mL/m2)                      |
+| lvef      | 50    | 78    | LV Ejection Fraction (%)              |
+| lvmi      | 47    | 91    | LV Mass * (g/m2)                      |
+| svi       | 28    | 72    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 85    | 225   | LV EDV Absolute (mL)                  |
+| lvesv     | 20    | 93    | LV ESV Absolute (mL)                  |
+| lvsv      | 47    | 149   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 82    | 177   | LV Mass Absolute (g)                  |
+| co        | 2.7   | 9.7   | Cardiac Output (L/min)                |
+| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |
+
+--- MALE AGE 30 LV ---
+
+
+| lvedvi    | 48    | 98    | LV EDV * (mL/m2)                      |
+| lvesvi    | 12    | 38    | LV ESV * (mL/m2)                      |
+| lvef      | 54    | 77    | LV Ejection Fraction (%)              |
+| lvmi      | 45    | 86    | LV Mass * (g/m2)                      |
+| svi       | 30    | 65    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 86    | 205   | LV EDV Absolute (mL)                  |
+| lvesv     | 22    | 79    | LV ESV Absolute (mL)                  |
+| lvsv      | 51    | 135   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 81    | 169   | LV Mass Absolute (g)                  |
+| co        | 2.2   | 9.6   | Cardiac Output (L/min)                |
+| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |
+
+--- MALE AGE 40 LV ---
+
+
+| lvedvi    | 46    | 101   | LV EDV * (mL/m2)                      |
+| lvesvi    | 10    | 41    | LV ESV * (mL/m2)                      |
+| lvef      | 52    | 79    | LV Ejection Fraction (%)              |
+| lvmi      | 42    | 86    | LV Mass * (g/m2)                      |
+| svi       | 30    | 67    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 81    | 207   | LV EDV Absolute (mL)                  |
+| lvesv     | 18    | 84    | LV ESV Absolute (mL)                  |
+| lvsv      | 51    | 137   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 79    | 170   | LV Mass Absolute (g)                  |
+| co        | 2.2   | 9.3   | Cardiac Output (L/min)                |
+| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |
+
+--- MALE AGE 50 LV ---
+
+
+| lvedvi    | 41    | 99    | LV EDV * (mL/m2)                      |
+| lvesvi    | 9     | 40    | LV ESV * (mL/m2)                      |
+| lvef      | 53    | 78    | LV Ejection Fraction (%)              |
+| lvmi      | 43    | 84    | LV Mass * (g/m2)                      |
+| svi       | 27    | 66    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 72    | 203   | LV EDV Absolute (mL)                  |
+| lvesv     | 15    | 80    | LV ESV Absolute (mL)                  |
+| lvsv      | 46    | 135   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 76    | 171   | LV Mass Absolute (g)                  |
+| co        | 2.3   | 8.6   | Cardiac Output (L/min)                |
+| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |
+
+--- MALE AGE 60 LV ---
+
+
+| lvedvi    | 39    | 98    | LV EDV * (mL/m2)                      |
+| lvesvi    | 7     | 39    | LV ESV * (mL/m2)                      |
+| lvef      | 53    | 81    | LV Ejection Fraction (%)              |
+| lvmi      | 42    | 86    | LV Mass * (g/m2)                      |
+| svi       | 27    | 64    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 65    | 198   | LV EDV Absolute (mL)                  |
+| lvesv     | 11    | 77    | LV ESV Absolute (mL)                  |
+| lvsv      | 45    | 129   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 75    | 172   | LV Mass Absolute (g)                  |
+| co        | 2.4   | 8.2   | Cardiac Output (L/min)                |
+| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |
+
+--- MALE AGE 70 LV ---
+
+
+| lvedvi    | 44    | 95    | LV EDV * (mL/m2)                      |
+| lvesvi    | 10    | 38    | LV ESV * (mL/m2)                      |
+| lvef      | 52    | 79    | LV Ejection Fraction (%)              |
+| lvmi      | 37    | 86    | LV Mass * (g/m2)                      |
+| svi       | 28    | 64    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 81    | 183   | LV EDV Absolute (mL)                  |
+| lvesv     | 19    | 74    | LV ESV Absolute (mL)                  |
+| lvsv      | 52    | 126   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 65    | 176   | LV Mass Absolute (g)                  |
+| co        | 3.3   | 7.8   | Cardiac Output (L/min)                |
+| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |
+
+[ WOMEN - LEFT VENTRICLE ]
+
+--- FEMALE AGE 20 LV ---
+
+
+| lvedvi    | 48    | 95    | LV EDV * (mL/m2)                      |
+| lvesvi    | 12    | 36    | LV ESV * (mL/m2)                      |
+| lvef      | 54    | 78    | LV Ejection Fraction (%)              |
+| lvmi      | 36    | 72    | LV Mass * (g/m2)                      |
+| svi       | 32    | 64    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 73    | 172   | LV EDV Absolute (mL)                  |
+| lvesv     | 20    | 67    | LV ESV Absolute (mL)                  |
+| lvsv      | 45    | 115   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 54    | 119   | LV Mass Absolute (g)                  |
+| co        | 2.6   | 7.6   | Cardiac Output (L/min)                |
+| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |
+
+--- FEMALE AGE 30 LV ---
+
+
+| lvedvi    | 46    | 92    | LV EDV * (mL/m2)                      |
+| lvesvi    | 8     | 38    | LV ESV * (mL/m2)                      |
+| lvef      | 54    | 80    | LV Ejection Fraction (%)              |
+| lvmi      | 35    | 70    | LV Mass * (g/m2)                      |
+| svi       | 29    | 62    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 71    | 162   | LV EDV Absolute (mL)                  |
+| lvesv     | 14    | 65    | LV ESV Absolute (mL)                  |
+| lvsv      | 42    | 111   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 51    | 118   | LV Mass Absolute (g)                  |
+| co        | 2.5   | 7.8   | Cardiac Output (L/min)                |
+| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |
+
+--- FEMALE AGE 40 LV ---
+
+
+| lvedvi    | 46    | 89    | LV EDV * (mL/m2)                      |
+| lvesvi    | 10    | 34    | LV ESV * (mL/m2)                      |
+| lvef      | 55    | 79    | LV Ejection Fraction (%)              |
+| lvmi      | 31    | 73    | LV Mass * (g/m2)                      |
+| svi       | 31    | 61    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 68    | 162   | LV EDV Absolute (mL)                  |
+| lvesv     | 15    | 62    | LV ESV Absolute (mL)                  |
+| lvsv      | 46    | 109   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 47    | 123   | LV Mass Absolute (g)                  |
+| co        | 2.4   | 7.5   | Cardiac Output (L/min)                |
+| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |
+
+--- FEMALE AGE 50 LV ---
+
+
+| lvedvi    | 41    | 86    | LV EDV * (mL/m2)                      |
+| lvesvi    | 8     | 33    | LV ESV * (mL/m2)                      |
+| lvef      | 55    | 81    | LV Ejection Fraction (%)              |
+| lvmi      | 32    | 72    | LV Mass * (g/m2)                      |
+| svi       | 29    | 59    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 64    | 155   | LV EDV Absolute (mL)                  |
+| lvesv     | 13    | 58    | LV ESV Absolute (mL)                  |
+| lvsv      | 44    | 106   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 54    | 124   | LV Mass Absolute (g)                  |
+| co        | 2.4   | 7.1   | Cardiac Output (L/min)                |
+| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |
+
+--- FEMALE AGE 60 LV ---
+
+
+| lvedvi    | 40    | 84    | LV EDV * (mL/m2)                      |
+| lvesvi    | 7     | 31    | LV ESV * (mL/m2)                      |
+| lvef      | 56    | 83    | LV Ejection Fraction (%)              |
+| lvmi      | 33    | 75    | LV Mass * (g/m2)                      |
+| svi       | 28    | 57    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 59    | 151   | LV EDV Absolute (mL)                  |
+| lvesv     | 9     | 56    | LV ESV Absolute (mL)                  |
+| lvsv      | 43    | 102   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 52    | 129   | LV Mass Absolute (g)                  |
+| co        | 2.6   | 6.7   | Cardiac Output (L/min)                |
+| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |
+
+--- FEMALE AGE 70 LV ---
+
+
+| lvedvi    | 42    | 82    | LV EDV * (mL/m2)                      |
+| lvesvi    | 9     | 31    | LV ESV * (mL/m2)                      |
+| lvef      | 56    | 81    | LV Ejection Fraction (%)              |
+| lvmi      | 29    | 74    | LV Mass * (g/m2)                      |
+| svi       | 28    | 57    | LV Stroke Vol * (mL/m2)               |
+| lvedv     | 68    | 142   | LV EDV Absolute (mL)                  |
+| lvesv     | 15    | 55    | LV ESV Absolute (mL)                  |
+| lvsv      | 45    | 100   | LV Stroke Vol Absolute (mL)           |
+| lvm       | 44    | 133   | LV Mass Absolute (g)                  |
+| co        | 2.8   | 6.6   | Cardiac Output (L/min)                |
+| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |
+
+[ MEN - RIGHT VENTRICLE ]
+
+--- MALE AGE 20 RV ---
+
+
+| rvedvi    | 56    | 129   | RV EDV * (mL/m2)                      |
+| rvesvi    | 12    | 73    | RV ESV * (mL/m2)                      |
+| rvedv     | 93    | 254   | RV EDV Absolute (mL)                  |
+| rvesv     | 20    | 147   | RV ESV Absolute (mL)                  |
+| rvsv      | 27    | 160   | RV Stroke Volume (mL)                 |
+| rvef      | 27    | 78    | RV Ejection Fraction (%)              |
+
+--- MALE AGE 30 RV ---
+
+
+| rvedvi    | 50    | 111   | RV EDV * (mL/m2)                      |
+| rvesvi    | 18    | 55    | RV ESV * (mL/m2)                      |
+| rvedv     | 81    | 230   | RV EDV Absolute (mL)                  |
+| rvesv     | 29    | 113   | RV ESV Absolute (mL)                  |
+| rvsv      | 36    | 133   | RV Stroke Volume (mL)                 |
+| rvef      | 41    | 69    | RV Ejection Fraction (%)              |
+
+--- MALE AGE 40 RV ---
+
+
+| rvedvi    | 45    | 114   | RV EDV * (mL/m2)                      |
+| rvesvi    | 14    | 55    | RV ESV * (mL/m2)                      |
+| rvedv     | 70    | 231   | RV EDV Absolute (mL)                  |
+| rvesv     | 21    | 111   | RV ESV Absolute (mL)                  |
+| rvsv      | 28    | 141   | RV Stroke Volume (mL)                 |
+| rvef      | 41    | 72    | RV Ejection Fraction (%)              |
+
+--- MALE AGE 50 RV ---
+
+
+| rvedvi    | 42    | 112   | RV EDV * (mL/m2)                      |
+| rvesvi    | 12    | 55    | RV ESV * (mL/m2)                      |
+| rvedv     | 67    | 225   | RV EDV Absolute (mL)                  |
+| rvesv     | 19    | 107   | RV ESV Absolute (mL)                  |
+| rvsv      | 35    | 135   | RV Stroke Volume (mL)                 |
+| rvef      | 44    | 71    | RV Ejection Fraction (%)              |
+
+--- MALE AGE 60 RV ---
+
+
+| rvedvi    | 38    | 105   | RV EDV * (mL/m2)                      |
+| rvesvi    | 12    | 46    | RV ESV * (mL/m2)                      |
+| rvedv     | 50    | 214   | RV EDV Absolute (mL)                  |
+| rvesv     | 14    | 93    | RV ESV Absolute (mL)                  |
+| rvsv      | 27    | 130   | RV Stroke Volume (mL)                 |
+| rvef      | 48    | 72    | RV Ejection Fraction (%)              |
+
+--- MALE AGE 70 RV ---
+
+
+| rvedvi    | 52    | 106   | RV EDV * (mL/m2)                      |
+| rvesvi    | 18    | 47    | RV ESV * (mL/m2)                      |
+| rvedv     | 101   | 214   | RV EDV Absolute (mL)                  |
+| rvesv     | 34    | 94    | RV ESV Absolute (mL)                  |
+| rvsv      | 56    | 130   | RV Stroke Volume (mL)                 |
+| rvef      | 48    | 71    | RV Ejection Fraction (%)              |
+
+[ WOMEN - RIGHT VENTRICLE ]
+
+--- FEMALE AGE 20 RV ---
+
+
+| rvedvi    | 51    | 102   | RV EDV * (mL/m2)                      |
+| rvesvi    | 11    | 55    | RV ESV * (mL/m2)                      |
+| rvedv     | 72    | 176   | RV EDV Absolute (mL)                  |
+| rvesv     | 17    | 97    | RV ESV Absolute (mL)                  |
+| rvsv      | 33    | 106   | RV Stroke Volume (mL)                 |
+| rvef      | 35    | 76    | RV Ejection Fraction (%)              |
+
+--- FEMALE AGE 30 RV ---
+
+
+| rvedvi    | 47    | 100   | RV EDV * (mL/m2)                      |
+| rvesvi    | 9     | 53    | RV ESV * (mL/m2)                      |
+| rvedv     | 68    | 166   | RV EDV Absolute (mL)                  |
+| rvesv     | 13    | 86    | RV ESV Absolute (mL)                  |
+| rvsv      | 24    | 114   | RV Stroke Volume (mL)                 |
+| rvef      | 35    | 80    | RV Ejection Fraction (%)              |
+
+--- FEMALE AGE 40 RV ---
+
+
+| rvedvi    | 45    | 97    | RV EDV * (mL/m2)                      |
+| rvesvi    | 12    | 45    | RV ESV * (mL/m2)                      |
+| rvedv     | 63    | 175   | RV EDV Absolute (mL)                  |
+| rvesv     | 17    | 78    | RV ESV Absolute (mL)                  |
+| rvsv      | 36    | 111   | RV Stroke Volume (mL)                 |
+| rvef      | 47    | 75    | RV Ejection Fraction (%)              |
+
+--- FEMALE AGE 50 RV ---
+
+
+| rvedvi    | 41    | 91    | RV EDV * (mL/m2)                      |
+| rvesvi    | 11    | 41    | RV ESV * (mL/m2)                      |
+| rvedv     | 54    | 167   | RV EDV Absolute (mL)                  |
+| rvesv     | 14    | 73    | RV ESV Absolute (mL)                  |
+| rvsv      | 30    | 108   | RV Stroke Volume (mL)                 |
+| rvef      | 49    | 75    | RV Ejection Fraction (%)              |
+
+--- FEMALE AGE 60 RV ---
+
+
+| rvedvi    | 41    | 90    | RV EDV * (mL/m2)                      |
+| rvesvi    | 10    | 38    | RV ESV * (mL/m2)                      |
+| rvedv     | 54    | 164   | RV EDV Absolute (mL)                  |
+| rvesv     | 12    | 68    | RV ESV Absolute (mL)                  |
+| rvsv      | 35    | 103   | RV Stroke Volume (mL)                 |
+| rvef      | 51    | 77    | RV Ejection Fraction (%)              |
+
+--- FEMALE AGE 70 RV ---
+
+
+| rvedvi    | 47    | 90    | RV EDV * (mL/m2)                      |
+| rvesvi    | 14    | 36    | RV ESV * (mL/m2)                      |
+| rvedv     | 77    | 162   | RV EDV Absolute (mL)                  |
+| rvesv     | 22    | 65    | RV ESV Absolute (mL)                  |
+| rvsv      | 47    | 104   | RV Stroke Volume (mL)                 |
+| rvef      | 53    | 75    | RV Ejection Fraction (%)              |
+================================================================================
+
+[ LV DIAMETRE (bSSFP) ]
+
+--- MALE: LV Diameters ---
+
+Parameter                             | LL-UL
+--------------------------------------+-------
+LV end-diastolic 4ch (mm)             | 39-59
+LV end-diastolic SAX (mm)             | 44-61
+LV end-systolic 4ch (mm)              | 26-38
+LV end-systolic SAX (mm)              | 28-40
+LV end-diastolic 4ch/BSA (mm/m2)      | 18-34
+LV end-diastolic SAX/BSA (mm/m2)      | 20-32
+LV end-systolic 4ch/BSA (mm/m2)       | 13-21
+
+--- FEMALE: LV Diameters ---
+
+Parameter                             | LL-UL
+--------------------------------------+-------
+LV end-diastolic 4ch (mm)             | 36-56
+LV end-diastolic SAX (mm)             | 40-56
+LV end-systolic 4ch (mm)              | 16-40
+LV end-systolic SAX (mm)              | 23-39
+LV end-diastolic 4ch/BSA (mm/m2)      | 19-35
+LV end-diastolic SAX/BSA (mm/m2)      | 24-40
+LV end-systolic 4ch/BSA (mm/m2)       | 9-25
+
+================================================================================
+
+[ VENSTRE ATRIUM VOLUMEN ]
+
+--- MALE BI-PLANE (APPENDAGE EXCLUDED) ---
+
+| la_max    | 26    | 110   | LA Max Volume Absolute (mL)           |
+| la_max_i  | 16    | 56    | LA Max Volume * (mL/m2)               |
+
+--- MALE SIMPSON'S (APPENDAGE INCLUDED) ---
+
+| la_max    | 40    | 111   | LA Max Volume Absolute (mL)           |
+| la_max_i  | 25    | 56    | LA Max Volume * (mL/m2)               |
+
+--- FEMALE BI-PLANE (APPENDAGE EXCLUDED) ---
+
+| la_max    | 26    | 94    | LA Max Volume Absolute (mL)           |
+| la_max_i  | 18    | 54    | LA Max Volume * (mL/m2)               |
+
+--- FEMALE SIMPSON'S (APPENDAGE INCLUDED) ---
+
+| la_max    | 38    | 93    | LA Max Volume Absolute (mL)           |
+| la_max_i  | 25    | 56    | LA Max Volume * (mL/m2)               |
+
+================================================================================
+  `;
+
+  const refWin = window.open("", "refWindow", "width=800,height=600");
+
+  refWin.document.write(`
+    <html>
+    <head><title>Reference</title></head>
+    <body>
+      <pre style="font-family: monospace; white-space: pre;">${asciiText}</pre>
+    </body>
+    </html>
+  `);
+
+  refWin.document.close(); // Gemini’s line
+}
+
+        
+
+
+    document.getElementById('activateBtn').addEventListener('click', function() {
+      // This document.write replaces the entire content of the document.
+      
+      
+      document.write(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>ASCII Art</title>
+    <style>
+      body { font-family: monospace; }
+    </style>
+  </head>
+  <body>
+    <pre>
+░░▒░░█░
+░░▒░█
+░░░█
+░░█░░░░███████
+░██░░░██▓▓███▓██▒
+██░░░█▓▓▓▓▓▓▓█▓████
+██░░██▓▓▓(◐)▓█▓█▓█
+███▓▓▓█▓▓▓▓▓█▓█▓▓▓▓█
+▀██▓▓█░██▓▓▓▓██▓▓▓▓▓█
+░▀██▀░░█▓▓▓▓▓▓▓▓▓▓▓▓▓█
+░░░░▒░░░█▓▓▓▓▓█▓▓▓▓▓▓█
+░░░░▒░░░█▓▓▓▓█▓█▓▓▓▓▓█
+░▒░░▒░░░█▓▓▓█▓▓▓█▓▓▓▓█
+░▒░░▒░░░█▓▓▓█░░░█▓▓▓█
+░▒░░▒░░██▓██░░░██▓▓██
+████████████████████████
+    </pre>
+  </body>
+</html>`);
+    });
+
+
+        
+</script>
+
+</body
