@@ -4,9 +4,6 @@
 <!-- saved from url=(0110)file:///C:/Users/syr8ek/Desktop/Kaldaras,%20Mirsa%3B%202307680AM7%3B%202022-5-3%20%2012%3B17%20PM/index250.htm -->
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
 <link rel="manifest" href="manifest.json">
 <script>
   if ('serviceWorker' in navigator) {
@@ -52,6 +49,12 @@ input[type=submit]:hover {
 input.highlight {
   background-color: #fffacd;
   border: 1px solid #aaa;
+}
+
+input.hr-field {
+  background-color: #ffe5cc;
+  border: 1px solid #e0905a;
+  font-weight: 600;
 }
 
 #cineSection label, #tekstSection label {
@@ -171,101 +174,146 @@ input[type=submit]:hover {
 <h2>Indtast målinger og data</h2>
 
 <div id="measureDiv">
+  <!-- Row 1: Demographics -->
   <div class="row">
    <div class="col-25">
    <input type="number" id="num1" placeholder="Alder" class="highlight">
-     </div>
+   </div>
    <div class="col-25">
    <select id="sex">
      <option value="M">Mand</option>
      <option value="F">Kvinde</option>
    </select>
-     </div>
-   <div class="col-25">
-<input type="number" id="num2" placeholder="Højde i cm (H)" class="highlight">
-     </div>
-   
-
-   <div class="col-25"> 
-<input type="number" id="num3" placeholder="Vægt i kg (V)" class="highlight">
-     </div>
-   <div class="col-25">
-<input type="number" id="num4" placeholder="HR" style="width:80px;" class="highlight"><br><br>
-     </div>
-       </div>
-  <div class="row">
-   <div class="col-25">
-<input type="number" id="num5" placeholder="Aortarod(Sinus) i mm">
-     </div>
-   <div class="col-25">
-<input type="number" id="num6" placeholder="VA 4K cm2"><br><br>
-     </div>
-   <div class="col-25">
-<input type="number" id="num7" placeholder="VA 2K cm2">
-     </div>
-   <div class="col-25">
-<input type="number" id="num8" placeholder="Længde VA cm"><br><br>
-     </div>
    </div>
-   
-  
+   <div class="col-25">
+   <input type="number" id="num2" placeholder="Højde i cm (H)" class="highlight">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num3" placeholder="Vægt i kg (V)" class="highlight">
+   </div>
+  </div><br>
+
+  <!-- Row 2: LA / Aortarod -->
   <div class="row">
    <div class="col-25">
-<input type="number" id="num9" placeholder="LVID i mm" class="highlight">
-     </div>
+   <input type="number" id="num5" placeholder="Aortarod (Sinus) mm">
+   </div>
    <div class="col-25">
-<input type="number" id="num10" placeholder="LVIS i mm" class="highlight"><br><br>
-     </div>
-     <div class="col-25">
-<input type="number" id="num11" placeholder="IVD i mm" class="highlight">
-     </div>
-         <div class="col-25">
-<input type="number" id="num12" placeholder="RVID i mm"><br><br>
-     </div>
-    </div>
+   <input type="number" id="num6" placeholder="VA 4K cm2">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num7" placeholder="VA 2K cm2">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num8" placeholder="Længde VA cm">
+   </div>
+  </div><br>
+
+  <!-- Row 2b: Atrial volumes -->
   <div class="row">
    <div class="col-25">
-<input type="number" id="num13" placeholder="EDV ml" class="highlight">
-     </div>
+   <input type="number" id="num31" placeholder="VA vol ml">
+   </div>
    <div class="col-25">
-<input type="number" id="num14" placeholder="ESV ml" class="highlight"><br><br>
-     </div>
-     <div class="col-25">
-<input type="number" id="num15" placeholder="RV-EDV vol ml">
-     </div>
+   </div>
    <div class="col-25">
-<input type="number" id="num16" placeholder="RV-ESV vol ml"><br><br>
-     </div>
-    </div>
-    <div class="row">
+   </div>
    <div class="col-25">
-<input type="number" id="num17" placeholder="LV masse" class="highlight">
-    </div>
-   <div class="col-25">
-<input type="number" id="num18" placeholder="AO-VENC"><br><br>
-     </div>
-      <div class="col-25"> 
-<input type="number" id="num19" placeholder="AO-Qflow-forward(SV)" class="highlight">
-     </div>
-   <div class="col-25">
-<input type="number" id="num20" placeholder="AO-Qflow-Rev-flow" class="highlight"><br><br>
-     </div>
-       </div>
+   <input type="number" id="num33" placeholder="HA vol ml">
+   </div>
+  </div><br>
+
+  <!-- Row 3: LV diameters -->
   <div class="row">
    <div class="col-25">
-<input type="number" id="num21" placeholder="TP-VENC">
-     </div>
+   <input type="number" id="num9" placeholder="LVID i mm" class="highlight">
+   </div>
    <div class="col-25">
- <input type="number" id="num22" placeholder="Indtast TP-fasekontrast F-flow" class="highlight"><br><br>
-     </div>
+   <input type="number" id="num10" placeholder="LVIS i mm" class="highlight">
+   </div>
    <div class="col-25">
-<input type="number" id="num23" placeholder="Indtast TP-fasekontrast Rev-flow" class="highlight">
-     </div>
+   <input type="number" id="num11" placeholder="IVD i mm" class="highlight">
+   </div>
    <div class="col-25">
-<input type="number" id="num24" placeholder="Indtast Puls-fasekontrast" class="highlight"><br><br>
-     </div>
+   <input type="number" id="num12" placeholder="RVID i mm">
+   </div>
+  </div><br>
+
+  <!-- Row 4: LV/RV volumes + HR for volumetry -->
+  <div class="row">
+   <div class="col-25">
+   <input type="number" id="num13" placeholder="LV-EDV ml" class="highlight">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num14" placeholder="LV-ESV ml" class="highlight">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num15" placeholder="RV-EDV ml">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num16" placeholder="RV-ESV ml">
+   </div>
+  </div><br>
+
+  <!-- Row 5: LV mass + HR cine (HR governs volumetry CO) -->
+  <div class="row">
+   <div class="col-25">
+   <input type="number" id="num17" placeholder="LV masse" class="highlight">
+   </div>
+   <div class="col-25">
+   </div>
+   <div class="col-25">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num4" placeholder="HR cine (bpm)" class="hr-field">
+   </div>
+  </div><br>
+
+  <!-- Row 6: AO phase-contrast + AO pulse HR -->
+  <div class="row">
+   <div class="col-25">
+   <input type="number" id="num18" placeholder="AO-VENC">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num19" placeholder="AO-Qflow forward ml" class="highlight">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num20" placeholder="AO-Qflow reverse ml" class="highlight">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num24a" placeholder="HR AO-Qflow (bpm)" class="hr-field">
+   </div>
+  </div><br>
+
+  <!-- Row 7: TP phase-contrast + TP pulse HR -->
+  <div class="row">
+   <div class="col-25">
+   <input type="number" id="num21" placeholder="TP-VENC">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num22" placeholder="TP-Qflow forward ml" class="highlight">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num23" placeholder="TP-Qflow reverse ml" class="highlight">
+   </div>
+   <div class="col-25">
+   <input type="number" id="num24b" placeholder="HR TP-Qflow (bpm)" class="hr-field">
+   </div>
+  </div><br>
    </div>
      <div class="row">
+   <div class="col-25">
+<input type="number" id="num29" placeholder="T1 nativ blod">
+     </div>
+   <div class="col-25">
+     </div>
+   <div class="col-25">
+     </div>
+   <div class="col-25">
+<input type="number" id="num30" placeholder="T1* blod"><br><br>
+     </div>
+   </div>
+        <div class="row">
    <div class="col-25">
 <input type="number" id="num25" placeholder="T1 nativ">
      </div>
@@ -277,14 +325,6 @@ input[type=submit]:hover {
      </div>
    <div class="col-25">
 <input type="number" id="num28" placeholder="Hæmatokrit"><br><br>
-     </div>
-   </div>
-        <div class="row">
-   <div class="col-25">
-<input type="number" id="num29" placeholder="T1 nativ blod">
-     </div>
-   <div class="col-25">
-<input type="number" id="num30" placeholder="T1* blod"><br><br>
      </div>
      </div>
    
@@ -404,45 +444,54 @@ input[type=submit]:hover {
         <option value="Moderat nedsat systolisk funktion">Moderat nedsat funkt</option>
         <option value="Svært nedsat systolisk funktion">Svært nedsat funkt</option>
     </select><br><br>
- </div>
- <div class="col-50">
-     <label>Størrelse højre ventrikel:</label>
+</div>
+<div class="col-50">
+    <label>LV hypertrofi:</label>
+    <select id="select14">
+        <option value="Ingen hypertrofi">Ingen hypertrofi</option>
+        <option value="Let hypertrofi">Let hypertrofi</option>
+        <option value="Moderat hypertrofi">Moderat hypertrofi</option>
+        <option value="Svær hypertrofi">Svær hypertrofi</option>
+    </select><br><br>
+</div>
+</div>
+
+<div class="row">
+<div class="col-50">
+    <label>Størrelse højre ventrikel:</label>
     <select id="select10">
         <option value="Normal stor højre ventrikel">Norm. stor RV</option>
         <option value="Let dilateret højre ventrikel">Let dilat. RV</option>
         <option value="Moderat dilateret højre ventrikel">Moderat dilat. RV</option>
         <option value="Svært dilateret højre ventrikel">Svært dilat. RV</option>
     </select><br><br>
-  </div>
-  </div>
-<div class="row"> 
+</div>
 <div class="col-50">
-        <label>Funktion af højre ventrikel:</label>
+    <label>Funktion af højre ventrikel:</label>
     <select id="select11">
         <option value="Normal funktion højre ventrikel">Norm. syst. funktion.</option>
-        <option value="Let nedsatfunktion højre ventrikel">Norm. syst. funktion.</option>
-        <option value="Moderat nedsat funktion højre ventrikel">Norm. syst. funktion.</option>        
-        <option value="Svært nedsat RV funktion">Svært nedsat funkt</option>
+        <option value="Let nedsat funktion højre ventrikel">Let nedsat funktion</option>
+        <option value="Moderat nedsat funktion højre ventrikel">Moderat nedsat funktion</option>        
+        <option value="Svært nedsat RV funktion">Svært nedsat funktion</option>
     </select><br><br>
-  </div>
-   
-   <div class="col-50">
-            <label>Tricuspedalklappen:</label>
+</div>
+</div>
+
+<div class="row">
+<div class="col-50">
+    <label>Tricuspedalklappen:</label>
     <select id="select12">
+        <option value="Ingen tricuspedalinsufficiens">Ingen tricuspedalinsufficiens</option>
         <option value="Let tricuspedalinsufficiens">Let tricuspedalinsufficiens</option>
-        <option value="Moderat tricuspedalinsufficiens">Moderat triuspedalinsufficines</option>
+        <option value="Moderat tricuspedalinsufficiens">Moderat tricuspedalinsufficiens</option>
         <option value="Svært tricuspedalinsufficiens">Svært tricuspedalinsufficiens</option>
     </select><br><br>
 </div>
-</div>
- 
+<div class="col-50">
     <label>Vena cava inferior:</label>
-    <select id="select13"> 
-        <option value="Ingen dilatation af vena cava inferior med resp.kollaps">VC normal</option>
-        <option value="Let dilateret VC inf. let nedsat kollaps resp">Let dilateret VC</option>
-        <option value="Moderat dilateret VC inferior. Nedsat resp. kollaps">Moderat dilat VC</option>
-        <option value="Svært dilateret VC inferior.Nedsat resp. kollaps">Svært dilateret VC</option>
-    </select><br>
+    <input type="text" id="select13" placeholder="Ingen dilatation af vena cava inferior med resp.kollaps"><br><br>
+</div>
+</div>
     
 </div><br><br>
 
@@ -474,7 +523,7 @@ input[type=submit]:hover {
 
 
  <button id="activateBtn">Activate ASCII Art</button>
- <button onclick="openRefPopup()">Open ASCII Reference</button>
+ <button onclick="openRefPopup()">ASCII MR konfidensintervaller</button>
 
 
 <p>.-. .- ... -- ..- ... &#129339.- .-.. -... .. -. .. ..- ... ... . -.         </p>
@@ -650,13 +699,16 @@ for (i = 0; i < coll.length; i++) {
             var num21 = parseFloat(document.getElementById('num21').value);
             var num22 = parseFloat(document.getElementById('num22').value);
             var num23 = parseFloat(document.getElementById('num23').value);
-            var num24 = parseFloat(document.getElementById('num24').value);
+            var num24a = parseFloat(document.getElementById('num24a').value);
+            var num24b = parseFloat(document.getElementById('num24b').value);
             var num25 = parseFloat(document.getElementById('num25').value);
             var num26 = parseFloat(document.getElementById('num26').value);
             var num27 = parseFloat(document.getElementById('num27').value);
             var num28 = parseFloat(document.getElementById('num28').value);
             var num29 = parseFloat(document.getElementById('num29').value);
             var num30 = parseFloat(document.getElementById('num30').value);
+            var num31 = parseFloat(document.getElementById('num31').value);
+            var num33 = parseFloat(document.getElementById('num33').value);
             
             
             var BSA = Math.sqrt((num2*num3) / 3600).toFixed(2);
@@ -683,9 +735,9 @@ for (i = 0; i < coll.length; i++) {
             var CIrv =(((SVrv*num4)/1000)/BSA).toFixed(1);
             var Q =((num22-num23)/(num19-num20)).toFixed(1);
             var Qn =(num19-num20).toFixed(1);
-            var Qco =(((num19-num20)*num24)/1000).toFixed(1);
+            var Qco =(((num19-num20)*num24a)/1000).toFixed(1);
             var Qpn =(num22-num23).toFixed(1);
-            var Qpco =(((num22-num23)*num24)/1000).toFixed(1);
+            var Qpco =(((num22-num23)*num24b)/1000).toFixed(1);
             var Mi =(num17/BSA).toFixed(1);
             
             
@@ -693,6 +745,15 @@ for (i = 0; i < coll.length; i++) {
             var RFh=(100*(num23/num22)).toFixed(1);
             
             var ECV=((1-num28)*(1/num27-1/num25)/(1/num30-1/num29)).toFixed(2);
+
+            // Atrial volumes indexed
+            var LAmaxi = (!isNaN(num31) && !isNaN(BSA)) ? (num31/BSA).toFixed(1) : NaN;
+            var RAmaxi = (!isNaN(num33) && !isNaN(BSA)) ? (num33/BSA).toFixed(1) : NaN;
+
+            // MR vol: LV-SV minus AO-Qflow net
+            var MRao = (!isNaN(SV) && !isNaN(Qn)) ? (parseFloat(SV) - parseFloat(Qn)).toFixed(1) : NaN;
+            // MR vol: LV-SV minus TP-Qflow net
+            var MRtp = (!isNaN(SV) && !isNaN(Qpn)) ? (parseFloat(SV) - parseFloat(Qpn)).toFixed(1) : NaN;
                   
             // LV Diameter refs (sex-specific, not age-dependent)
             const lvdRef = sex === 'M'
@@ -711,8 +772,13 @@ for (i = 0; i < coll.length; i++) {
             if (!isNaN(num5))  outputText += `Aorta(s): ${num5} mm.<br>`;
             if (!isNaN(num6))  outputText += `LA area (4k): ${num6} cm2.<br>`;
             if (!isNaN(num7))  outputText += `LA area (2k): ${num7} cm2.<br>`;
-            if (!isNaN(VA))    outputText += `LA vol: ${VA} ml ${laRef}.<br>`;
-            if (!isNaN(VAi))   outputText += `LA vol*: ${VAi} ml/m2 ${laRefI}.<br><br>`;
+            if (!isNaN(VA))    outputText += `VA vol (biplan): ${VA} ml ${laRef}.<br>`;
+            if (!isNaN(VAi))   outputText += `VA vol* (biplan): ${VAi} ml/m2 ${laRefI}.<br>`;
+            if (!isNaN(num31)) outputText += `VA max: ${num31} ml ${laRef}.<br>`;
+            if (!isNaN(LAmaxi)) outputText += `VA max*: ${LAmaxi} ml/m2 ${laRefI}.<br>`;
+            if (!isNaN(num33)) outputText += `HA max: ${num33} ml.<br>`;
+            if (!isNaN(RAmaxi)) outputText += `HA max*: ${RAmaxi} ml/m2.<br>`;
+            outputText += `<br>`;
 
             if (!isNaN(num9))  outputText += `LVID: ${num9} mm ${lvdRef.lvid}.<br>`;
             if (!isNaN(LVIDi)) outputText += `LVID*: ${LVIDi} mm/m2 ${lvdRef.lvidi}.<br>`;
@@ -747,17 +813,20 @@ for (i = 0; i < coll.length; i++) {
             if (!isNaN(num19)) outputText += `AO-Qflow forward: ${num19} ml.<br>`;
             if (!isNaN(num20)) outputText += `AO-Qflow reverse: ${num20} ml.<br>`;
             if (!isNaN(Qn))    outputText += `AO-Qflow net: ${Qn} ml.<br>`;
+            if (!isNaN(num24a)) outputText += `HR AO-Qflow: ${num24a} bpm.<br>`;
             if (!isNaN(Qco))   outputText += `AO-Qflow net CO: ${Qco} L/min.<br>`;
-            if (!isNaN(RFv))   outputText += `RF A-klap: ${RFv}%.<br><br>`;
+            if (!isNaN(RFv))   outputText += `RF A-klap: ${RFv}%.<br>`;
+            if (!isNaN(MRao))  outputText += `MR vol (LV-SV−AO-net): ${MRao} ml.<br><br>`;
 
             if (!isNaN(num21)) outputText += `TPvenc: ${num21}.<br>`;
             if (!isNaN(num22)) outputText += `TP-Qflow forward: ${num22} ml.<br>`;
             if (!isNaN(num23)) outputText += `TP-Qflow reverse: ${num23} ml.<br>`;
             if (!isNaN(Qpn))   outputText += `TP-Qflow net: ${Qpn} ml.<br>`;
+            if (!isNaN(num24b)) outputText += `HR TP-Qflow: ${num24b} bpm.<br>`;
             if (!isNaN(Qpco))  outputText += `TP-Qflow net CO: ${Qpco} L/min.<br>`;
             if (!isNaN(RFh))   outputText += `RF P-klap: ${RFh}%.<br>`;
-            if (!isNaN(Q))     outputText += `Shunt Qp:Qs: ${Q}.<br>`;
-            if (!isNaN(num24)) outputText += `Puls Qflow: ${num24}.<br><br>`;
+            if (!isNaN(MRtp))  outputText += `MR vol (LV-SV−TP-net): ${MRtp} ml.<br>`;
+            if (!isNaN(Q))     outputText += `Shunt Qp:Qs: ${Q}.<br><br>`;
 
             if (!isNaN(num25)) outputText += `T1 nativ: ${num25}.<br>`;
             if (!isNaN(num26)) outputText += `T2 nativ: ${num26}.<br>`;
@@ -779,7 +848,8 @@ for (i = 0; i < coll.length; i++) {
     // Auto-update measurements output on any number input or sex change
     ['num1','num2','num3','num4','num5','num6','num7','num8','num9','num10',
      'num11','num12','num13','num14','num15','num16','num17','num18','num19','num20',
-     'num21','num22','num23','num24','num25','num26','num27','num28','num29','num30','sex']
+     'num21','num22','num23','num24a','num24b','num25','num26','num27','num28','num29','num30',
+     'num31','num33','sex']
     .forEach(id => document.getElementById(id).addEventListener('input', handleSubmit));
     document.getElementById('sex').addEventListener('change', handleSubmit);
 
@@ -797,8 +867,9 @@ for (i = 0; i < coll.length; i++) {
         const selectedValue11 = document.getElementById('select11').value;
         const selectedValue12 = document.getElementById('select12').value;
         const selectedValue13 = document.getElementById('select13').value;
+        const selectedValue14 = document.getElementById('select14').value;
         document.getElementById('output44').innerHTML =
-            `CINE/SSFP:<br>Situs solitus. ${selectedValue1}. ${selectedValue2}.<br>${selectedValue3}.${selectedValue4}.<br>${selectedValue5}.${selectedValue6}<br>${selectedValue7}.<br>${selectedValue8}.${selectedValue9}.<br>${selectedValue10}.${selectedValue11}.${selectedValue12}.<br>${selectedValue13}.<br>Ingen perikardieeksudat.`;
+            `CINE/SSFP:<br>Situs solitus. ${selectedValue1}. ${selectedValue2}.<br>${selectedValue3}.${selectedValue4}.<br>${selectedValue5}.${selectedValue6}<br>${selectedValue7}.<br>${selectedValue8}.${selectedValue9}.${selectedValue14}.<br>${selectedValue10}.${selectedValue11}.${selectedValue12}.<br>${selectedValue13}.<br>Ingen perikardieeksudat.`;
     }
 
     function updateSupp() {
@@ -821,8 +892,9 @@ for (i = 0; i < coll.length; i++) {
     }
 
     ['select1','select2','select3','select4','select5','select6',
-     'select7','select8','select9','select10','select11','select12','select13']
+     'select7','select8','select9','select10','select11','select12','select14']
     .forEach(id => document.getElementById(id).addEventListener('change', updateCINE));
+    document.getElementById('select13').addEventListener('input', updateCINE);
 
     ['myText11','myText12','myText13','myText14','myText15','myText16','myText17']
     .forEach(id => document.getElementById(id).addEventListener('input', updateSupp));
