@@ -815,24 +815,36 @@ document.getElementById('select13').addEventListener('input',updateCINE);
 updateCINE();
 updateSupp();
 
-// Fixed copy button — modern clipboard API
+// Fixed copy button — grabs all three output divs
+function getMRReportText(){
+  const d1 = document.getElementById('output20');
+  const d2 = document.getElementById('output44');
+  const d3 = document.getElementById('output66');
+  return [d1,d2,d3].map(d => d ? d.innerText : '').filter(t=>t.trim()).join('\n\n');
+}
+
+function fallbackCopyMR(text, btn){
+  const tmp=document.createElement('textarea');
+  tmp.value=text;
+  document.body.appendChild(tmp);
+  tmp.select();
+  document.execCommand('copy');
+  document.body.removeChild(tmp);
+  btn.textContent='✓ Kopieret!';
+  setTimeout(()=>btn.textContent='Kopier tekst nedenfor',1800);
+}
+
 document.querySelectorAll('.copyButton').forEach(function(button){
   button.addEventListener('click',function(){
-    const textToCopy=button.nextElementSibling.innerText;
-    navigator.clipboard.writeText(textToCopy).then(function(){
-      const orig=button.textContent;
-      button.textContent='✓ Kopieret!';
-      setTimeout(()=>button.textContent=orig,1800);
-    }).catch(function(){
-      const tmp=document.createElement('textarea');
-      tmp.value=textToCopy;
-      document.body.appendChild(tmp);
-      tmp.select();
-      document.execCommand('copy');
-      document.body.removeChild(tmp);
-      button.textContent='✓ Kopieret!';
-      setTimeout(()=>button.textContent='Kopier tekst nedenfor',1800);
-    });
+    const text = getMRReportText();
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(function(){
+        button.textContent='✓ Kopieret!';
+        setTimeout(()=>button.textContent='Kopier tekst nedenfor',1800);
+      }).catch(()=>fallbackCopyMR(text,button));
+    } else {
+      fallbackCopyMR(text,button);
+    }
   });
 });
 
