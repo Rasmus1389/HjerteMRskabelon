@@ -570,20 +570,33 @@ function bUpdateFields(){
       lge += `Iskæmisk fordelt LGE (subendokardialt til transmuralt) i ${sLisk.length} segment${sLisk.length>1?'er':''} (${bPct(sLisk.length)}%): ${sLisk.map(i=>`${bSegNavne[i]} (${bLgeGT(bState.lge[i])})`).join(', ')}.`;
     if(sLni.length>0){
       if(lge) lge += ' ';
-      lge += `Ikke-iskæmisk fordelt LGE (midmyokardialt/epikardialt) i ${sLni.length} segment${sLni.length>1?'er':''}: ${sLni.map(i=>bSegNavne[i]).join(', ')}. Overvej myokardit, sarkoidose eller kardiomyopati.`;
+      lge += `Ikke-iskæmisk fordelt LGE (midmyokardialt/epikardialt) i ${sLni.length} segment${sLni.length>1?'er':''}: ${sLni.map(i=>bSegNavne[i]).join(', ')}.`;
     }
-    // Interpretation suffix
+    // Interpretation suffix (pure LGE-derived — stays in LGE field)
     if(sM.length>0&&sI.length===0&&sR.length===0){
       const maxLGE=Math.max(...sM.map(i=>bState.lge[i]));
       if(maxLGE>=3) lge += ` Fund forenelige med gennemgået infarkt (${bGetTerr(sM)}) — ikke-viabelt myokardium. Ingen iskæmi.`;
       else lge += ` Subendokardialt infarkt med mulig restviabilitet (≤50% transmuralt). Ingen iskæmi.`;
-    } else if(sI.length>0&&sM.length===0){
-      lge += ` Inducerbar iskæmi i ${sI.length} seg (${bPct(sI.length)}%) uden ar. Territorium: ${bGetTerr(sI)}.`;
-    } else if(sI.length>0&&sM.length>0){
-      lge += ` Blandet mønster: iskæmi ${sI.length} seg + ar ${sM.length} seg — periinfarkt-iskæmi. Territorium: ${bGetTerr([...sI,...sM])}.`;
     }
   }
   document.getElementById('myText16').value = lge;
+
+  // Konklusion field: synthesis of perfusion (iskæmi) vs LGE (ar) — belongs here, not in LGE description
+  const sMpartial = sM.filter(i=>bState.lge[i]>=1&&bState.lge[i]<=3);       // <100% transmural + stress defect same segment
+  const sMfull     = sM.filter(i=>bState.lge[i]===4);                       // 100% transmural + stress defect same segment
+  const sMfullParadox = sMfull.filter(i=>!sR.includes(i));                  // ...but rest normal there (physiologically unexpected)
+  let konk = [];
+  if(sI.length>0){
+    konk.push(`Inducerbar iskæmi i ${sI.length} seg (${bPct(sI.length)}%) uden ar. Territorium: ${bGetTerr(sI)}.`);
+  }
+  if(sMpartial.length>0){
+    konk.push(`Periinfarkt-iskæmi* i ${sMpartial.length} segment${sMpartial.length>1?'er':''}: ${sMpartial.map(i=>`${bSegNavne[i]} (${bLgeGT(bState.lge[i])})`).join(', ')}. Territorium: ${bGetTerr(sMpartial)}.`);
+    konk.push(`* Periinfarkt iskæmi bør vægtes lavere.`);
+  }
+  if(sMfullParadox.length>0){
+    konk.push(`OBS uoverensstemmelse: Stressdefekt + 100% transmural LGE uden samtidig hviledefekt i ${sMfullParadox.length} segment${sMfullParadox.length>1?'er':''}: ${sMfullParadox.map(i=>bSegNavne[i]).join(', ')} — fysiologisk usædvanligt ved fuldt transmuralt ar. Kan skyldes resterende vasodilatatoreffekt (regadenoson) i hvilebilledet frem for reel diskrepans; vurder tidsinterval og evt. reevaluer.`);
+  }
+  if(konk.length>0) document.getElementById('myText17').value = konk.join(' ');
 
   // Trigger existing updateSupp so output66 refreshes
   updateSupp();
