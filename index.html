@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
 <script>
   if ('serviceWorker' in navigator) {
@@ -43,6 +45,15 @@ button:hover { background-color: gray; }
 .active, .collapsible:hover { background-color: rgb(90, 120, 80, 0.2); }
 .content { padding: 0 18px; display: none; overflow: hidden; background-color: rgb(90, 120, 80, 0.2); }
 
+/* ── Stress/Hvile slider ── */
+.stress-row { display:flex; align-items:center; gap:8px; margin:6px 0 12px; font-size:13px; }
+.stress-switch { position:relative; display:inline-block; width:44px; height:22px; }
+.stress-switch input { opacity:0; width:0; height:0; }
+.stress-slider { position:absolute; cursor:pointer; inset:0; background:#9bb59b; border-radius:22px; transition:background-color 0.2s; }
+.stress-slider:before { content:""; position:absolute; height:16px; width:16px; left:3px; top:3px; background:#fff; border-radius:50%; transition:transform 0.2s; }
+.stress-switch input:checked + .stress-slider { background:#c0392b; }
+.stress-switch input:checked + .stress-slider:before { transform:translateX(22px); }
+
 /* ── Bullseye styles ── */
 .bulls-wrap { margin: 10px 0 6px; }
 .bulls-section-title { font-size: 11px; font-weight: 700; letter-spacing: 1px; color: #444; text-transform: uppercase; margin: 8px 0 4px; }
@@ -58,9 +69,46 @@ canvas { cursor: pointer; max-width: 100%; }
 .bulls-stat b { color: #1a5276; }
 .bulls-hint { font-size: 10px; color: #999; margin-bottom: 6px; }
 .bulls-clear-btn { font-size: 11px; padding: 3px 12px; border: 1px solid #c0392b; border-radius: 12px; background: #fff; color: #c0392b; cursor: pointer; margin-bottom: 6px; }
+
+/* ── Ref overlay (inline, avoids popup blockers) ── */
+#refOverlay{
+  display:none;
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background:rgba(0,0,0,0.4); z-index:9999;
+  align-items:center; justify-content:center;
+}
+#refOverlay.open{ display:flex; }
+#refOverlayBox{
+  background:#fff; color:#000; border:1px solid #999;
+  max-width:90vw; max-height:85vh; width:800px;
+  overflow:auto; padding:16px; position:relative;
+  font-family:monospace; white-space:pre;
+}
+#refOverlayBox.error{ color:#900; font-family:sans-serif; white-space:normal; }
+#refOverlayClose{
+  position:sticky; top:0; float:right;
+  background:#eee; color:#000; border:1px solid #999;
+  padding:4px 10px; cursor:pointer; font-family:sans-serif;
+}
 </style>
 </head>
 <body>
+<div id="refOverlay" onclick="if(event.target===this) closeRefOverlay()">
+  <div id="refOverlayBox">
+    <button id="refOverlayClose" onclick="closeRefOverlay()">Close ✕</button>
+    <div id="refOverlayContent"></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCMR 2025 REFERENCE DATA — LIFEBOAT BLOCK                     -->
+<!-- This block is intentionally isolated from all application    -->
+<!-- logic (bullseye engine, ASCII art, etc). Do not move this     -->
+<!-- data inside any function. Any edit that needs to touch other  -->
+<!-- features should never need to open this block.                -->
+<!-- ============================================================ -->
+<script type="application/json" id="scmr-ref-data">"================================================================================\n| PARAMETER | LL    | UL    | DESCRIPTION                           |\n================================================================================\n[ MEN - LEFT VENTRICLE ]\n\n--- MALE AGE 20 LV ---\n\n| lvedvi    | 48    | 108   | LV EDV * (mL/m2)                      |\n| lvesvi    | 11    | 44    | LV ESV * (mL/m2)                      |\n| lvef      | 50    | 78    | LV Ejection Fraction (%)              |\n| lvmi      | 47    | 91    | LV Mass * (g/m2)                      |\n| svi       | 28    | 72    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 85    | 225   | LV EDV Absolute (mL)                  |\n| lvesv     | 20    | 93    | LV ESV Absolute (mL)                  |\n| lvsv      | 47    | 149   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 82    | 177   | LV Mass Absolute (g)                  |\n| co        | 2.7   | 9.7   | Cardiac Output (L/min)                |\n| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |\n\n--- MALE AGE 30 LV ---\n\n| lvedvi    | 48    | 98    | LV EDV * (mL/m2)                      |\n| lvesvi    | 12    | 38    | LV ESV * (mL/m2)                      |\n| lvef      | 54    | 77    | LV Ejection Fraction (%)              |\n| lvmi      | 45    | 86    | LV Mass * (g/m2)                      |\n| svi       | 30    | 65    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 86    | 205   | LV EDV Absolute (mL)                  |\n| lvesv     | 22    | 79    | LV ESV Absolute (mL)                  |\n| lvsv      | 51    | 135   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 81    | 169   | LV Mass Absolute (g)                  |\n| co        | 2.2   | 9.6   | Cardiac Output (L/min)                |\n| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |\n\n--- MALE AGE 40 LV ---\n\n| lvedvi    | 46    | 101   | LV EDV * (mL/m2)                      |\n| lvesvi    | 10    | 41    | LV ESV * (mL/m2)                      |\n| lvef      | 52    | 79    | LV Ejection Fraction (%)              |\n| lvmi      | 42    | 86    | LV Mass * (g/m2)                      |\n| svi       | 30    | 67    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 81    | 207   | LV EDV Absolute (mL)                  |\n| lvesv     | 18    | 84    | LV ESV Absolute (mL)                  |\n| lvsv      | 51    | 137   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 79    | 170   | LV Mass Absolute (g)                  |\n| co        | 2.2   | 9.3   | Cardiac Output (L/min)                |\n| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |\n\n--- MALE AGE 50 LV ---\n\n| lvedvi    | 41    | 99    | LV EDV * (mL/m2)                      |\n| lvesvi    | 9     | 40    | LV ESV * (mL/m2)                      |\n| lvef      | 53    | 78    | LV Ejection Fraction (%)              |\n| lvmi      | 43    | 84    | LV Mass * (g/m2)                      |\n| svi       | 27    | 66    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 72    | 203   | LV EDV Absolute (mL)                  |\n| lvesv     | 15    | 80    | LV ESV Absolute (mL)                  |\n| lvsv      | 46    | 135   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 76    | 171   | LV Mass Absolute (g)                  |\n| co        | 2.3   | 8.6   | Cardiac Output (L/min)                |\n| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |\n\n--- MALE AGE 60 LV ---\n\n| lvedvi    | 39    | 98    | LV EDV * (mL/m2)                      |\n| lvesvi    | 7     | 39    | LV ESV * (mL/m2)                      |\n| lvef      | 53    | 81    | LV Ejection Fraction (%)              |\n| lvmi      | 42    | 86    | LV Mass * (g/m2)                      |\n| svi       | 27    | 64    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 65    | 198   | LV EDV Absolute (mL)                  |\n| lvesv     | 11    | 77    | LV ESV Absolute (mL)                  |\n| lvsv      | 45    | 129   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 75    | 172   | LV Mass Absolute (g)                  |\n| co        | 2.4   | 8.2   | Cardiac Output (L/min)                |\n| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |\n\n--- MALE AGE 70 LV ---\n\n| lvedvi    | 44    | 95    | LV EDV * (mL/m2)                      |\n| lvesvi    | 10    | 38    | LV ESV * (mL/m2)                      |\n| lvef      | 52    | 79    | LV Ejection Fraction (%)              |\n| lvmi      | 37    | 86    | LV Mass * (g/m2)                      |\n| svi       | 28    | 64    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 81    | 183   | LV EDV Absolute (mL)                  |\n| lvesv     | 19    | 74    | LV ESV Absolute (mL)                  |\n| lvsv      | 52    | 126   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 65    | 176   | LV Mass Absolute (g)                  |\n| co        | 3.3   | 7.8   | Cardiac Output (L/min)                |\n| ci        | 1.9   | 4.4   | Cardiac Index (L/min/m2)              |\n\n[ WOMEN - LEFT VENTRICLE ]\n\n--- FEMALE AGE 20 LV ---\n\n| lvedvi    | 48    | 95    | LV EDV * (mL/m2)                      |\n| lvesvi    | 12    | 36    | LV ESV * (mL/m2)                      |\n| lvef      | 54    | 78    | LV Ejection Fraction (%)              |\n| lvmi      | 36    | 72    | LV Mass * (g/m2)                      |\n| svi       | 32    | 64    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 73    | 172   | LV EDV Absolute (mL)                  |\n| lvesv     | 20    | 67    | LV ESV Absolute (mL)                  |\n| lvsv      | 45    | 115   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 54    | 119   | LV Mass Absolute (g)                  |\n| co        | 2.6   | 7.6   | Cardiac Output (L/min)                |\n| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |\n\n--- FEMALE AGE 30 LV ---\n\n| lvedvi    | 46    | 92    | LV EDV * (mL/m2)                      |\n| lvesvi    | 8     | 38    | LV ESV * (mL/m2)                      |\n| lvef      | 54    | 80    | LV Ejection Fraction (%)              |\n| lvmi      | 35    | 70    | LV Mass * (g/m2)                      |\n| svi       | 29    | 62    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 71    | 162   | LV EDV Absolute (mL)                  |\n| lvesv     | 14    | 65    | LV ESV Absolute (mL)                  |\n| lvsv      | 42    | 111   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 51    | 118   | LV Mass Absolute (g)                  |\n| co        | 2.5   | 7.8   | Cardiac Output (L/min)                |\n| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |\n\n--- FEMALE AGE 40 LV ---\n\n| lvedvi    | 46    | 89    | LV EDV * (mL/m2)                      |\n| lvesvi    | 10    | 34    | LV ESV * (mL/m2)                      |\n| lvef      | 55    | 79    | LV Ejection Fraction (%)              |\n| lvmi      | 31    | 73    | LV Mass * (g/m2)                      |\n| svi       | 31    | 61    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 68    | 162   | LV EDV Absolute (mL)                  |\n| lvesv     | 15    | 62    | LV ESV Absolute (mL)                  |\n| lvsv      | 46    | 109   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 47    | 123   | LV Mass Absolute (g)                  |\n| co        | 2.4   | 7.5   | Cardiac Output (L/min)                |\n| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |\n\n--- FEMALE AGE 50 LV ---\n\n| lvedvi    | 41    | 86    | LV EDV * (mL/m2)                      |\n| lvesvi    | 8     | 33    | LV ESV * (mL/m2)                      |\n| lvef      | 55    | 81    | LV Ejection Fraction (%)              |\n| lvmi      | 32    | 72    | LV Mass * (g/m2)                      |\n| svi       | 29    | 59    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 64    | 155   | LV EDV Absolute (mL)                  |\n| lvesv     | 13    | 58    | LV ESV Absolute (mL)                  |\n| lvsv      | 44    | 106   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 54    | 124   | LV Mass Absolute (g)                  |\n| co        | 2.4   | 7.1   | Cardiac Output (L/min)                |\n| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |\n\n--- FEMALE AGE 60 LV ---\n\n| lvedvi    | 40    | 84    | LV EDV * (mL/m2)                      |\n| lvesvi    | 7     | 31    | LV ESV * (mL/m2)                      |\n| lvef      | 56    | 83    | LV Ejection Fraction (%)              |\n| lvmi      | 33    | 75    | LV Mass * (g/m2)                      |\n| svi       | 28    | 57    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 59    | 151   | LV EDV Absolute (mL)                  |\n| lvesv     | 9     | 56    | LV ESV Absolute (mL)                  |\n| lvsv      | 43    | 102   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 52    | 129   | LV Mass Absolute (g)                  |\n| co        | 2.6   | 6.7   | Cardiac Output (L/min)                |\n| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |\n\n--- FEMALE AGE 70 LV ---\n\n| lvedvi    | 42    | 82    | LV EDV * (mL/m2)                      |\n| lvesvi    | 9     | 31    | LV ESV * (mL/m2)                      |\n| lvef      | 56    | 81    | LV Ejection Fraction (%)              |\n| lvmi      | 29    | 74    | LV Mass * (g/m2)                      |\n| svi       | 28    | 57    | LV Stroke Vol * (mL/m2)               |\n| lvedv     | 68    | 142   | LV EDV Absolute (mL)                  |\n| lvesv     | 15    | 55    | LV ESV Absolute (mL)                  |\n| lvsv      | 45    | 100   | LV Stroke Vol Absolute (mL)           |\n| lvm       | 44    | 133   | LV Mass Absolute (g)                  |\n| co        | 2.8   | 6.6   | Cardiac Output (L/min)                |\n| ci        | 1.8   | 4.2   | Cardiac Index (L/min/m2)              |\n\n[ MEN - RIGHT VENTRICLE ]\n\n--- MALE AGE 20 RV ---\n\n| rvedvi    | 56    | 129   | RV EDV * (mL/m2)                      |\n| rvesvi    | 12    | 73    | RV ESV * (mL/m2)                      |\n| rvedv     | 93    | 254   | RV EDV Absolute (mL)                  |\n| rvesv     | 20    | 147   | RV ESV Absolute (mL)                  |\n| rvsv      | 27    | 160   | RV Stroke Volume (mL)                 |\n| rvef      | 27    | 78    | RV Ejection Fraction (%)              |\n\n--- MALE AGE 30 RV ---\n\n| rvedvi    | 50    | 111   | RV EDV * (mL/m2)                      |\n| rvesvi    | 18    | 55    | RV ESV * (mL/m2)                      |\n| rvedv     | 81    | 230   | RV EDV Absolute (mL)                  |\n| rvesv     | 29    | 113   | RV ESV Absolute (mL)                  |\n| rvsv      | 36    | 133   | RV Stroke Volume (mL)                 |\n| rvef      | 41    | 69    | RV Ejection Fraction (%)              |\n\n--- MALE AGE 40 RV ---\n\n| rvedvi    | 45    | 114   | RV EDV * (mL/m2)                      |\n| rvesvi    | 14    | 55    | RV ESV * (mL/m2)                      |\n| rvedv     | 70    | 231   | RV EDV Absolute (mL)                  |\n| rvesv     | 21    | 111   | RV ESV Absolute (mL)                  |\n| rvsv      | 28    | 141   | RV Stroke Volume (mL)                 |\n| rvef      | 41    | 72    | RV Ejection Fraction (%)              |\n\n--- MALE AGE 50 RV ---\n\n| rvedvi    | 42    | 112   | RV EDV * (mL/m2)                      |\n| rvesvi    | 12    | 55    | RV ESV * (mL/m2)                      |\n| rvedv     | 67    | 225   | RV EDV Absolute (mL)                  |\n| rvesv     | 19    | 107   | RV ESV Absolute (mL)                  |\n| rvsv      | 35    | 135   | RV Stroke Volume (mL)                 |\n| rvef      | 44    | 71    | RV Ejection Fraction (%)              |\n\n--- MALE AGE 60 RV ---\n\n| rvedvi    | 38    | 105   | RV EDV * (mL/m2)                      |\n| rvesvi    | 12    | 46    | RV ESV * (mL/m2)                      |\n| rvedv     | 50    | 214   | RV EDV Absolute (mL)                  |\n| rvesv     | 14    | 93    | RV ESV Absolute (mL)                  |\n| rvsv      | 27    | 130   | RV Stroke Volume (mL)                 |\n| rvef      | 48    | 72    | RV Ejection Fraction (%)              |\n\n--- MALE AGE 70 RV ---\n\n| rvedvi    | 52    | 106   | RV EDV * (mL/m2)                      |\n| rvesvi    | 18    | 47    | RV ESV * (mL/m2)                      |\n| rvedv     | 101   | 214   | RV EDV Absolute (mL)                  |\n| rvesv     | 34    | 94    | RV ESV Absolute (mL)                  |\n| rvsv      | 56    | 130   | RV Stroke Volume (mL)                 |\n| rvef      | 48    | 71    | RV Ejection Fraction (%)              |\n\n[ WOMEN - RIGHT VENTRICLE ]\n\n--- FEMALE AGE 20 RV ---\n\n| rvedvi    | 51    | 102   | RV EDV * (mL/m2)                      |\n| rvesvi    | 11    | 55    | RV ESV * (mL/m2)                      |\n| rvedv     | 72    | 176   | RV EDV Absolute (mL)                  |\n| rvesv     | 17    | 97    | RV ESV Absolute (mL)                  |\n| rvsv      | 33    | 106   | RV Stroke Volume (mL)                 |\n| rvef      | 35    | 76    | RV Ejection Fraction (%)              |\n\n--- FEMALE AGE 30 RV ---\n\n| rvedvi    | 47    | 100   | RV EDV * (mL/m2)                      |\n| rvesvi    | 9     | 53    | RV ESV * (mL/m2)                      |\n| rvedv     | 68    | 166   | RV EDV Absolute (mL)                  |\n| rvesv     | 13    | 86    | RV ESV Absolute (mL)                  |\n| rvsv      | 24    | 114   | RV Stroke Volume (mL)                 |\n| rvef      | 35    | 80    | RV Ejection Fraction (%)              |\n\n--- FEMALE AGE 40 RV ---\n\n| rvedvi    | 45    | 97    | RV EDV * (mL/m2)                      |\n| rvesvi    | 12    | 45    | RV ESV * (mL/m2)                      |\n| rvedv     | 63    | 175   | RV EDV Absolute (mL)                  |\n| rvesv     | 17    | 78    | RV ESV Absolute (mL)                  |\n| rvsv      | 36    | 111   | RV Stroke Volume (mL)                 |\n| rvef      | 47    | 75    | RV Ejection Fraction (%)              |\n\n--- FEMALE AGE 50 RV ---\n\n| rvedvi    | 41    | 91    | RV EDV * (mL/m2)                      |\n| rvesvi    | 11    | 41    | RV ESV * (mL/m2)                      |\n| rvedv     | 54    | 167   | RV EDV Absolute (mL)                  |\n| rvesv     | 14    | 73    | RV ESV Absolute (mL)                  |\n| rvsv      | 30    | 108   | RV Stroke Volume (mL)                 |\n| rvef      | 49    | 75    | RV Ejection Fraction (%)              |\n\n--- FEMALE AGE 60 RV ---\n\n| rvedvi    | 41    | 90    | RV EDV * (mL/m2)                      |\n| rvesvi    | 10    | 38    | RV ESV * (mL/m2)                      |\n| rvedv     | 54    | 164   | RV EDV Absolute (mL)                  |\n| rvesv     | 12    | 68    | RV ESV Absolute (mL)                  |\n| rvsv      | 35    | 103   | RV Stroke Volume (mL)                 |\n| rvef      | 51    | 77    | RV Ejection Fraction (%)              |\n\n--- FEMALE AGE 70 RV ---\n\n| rvedvi    | 47    | 90    | RV EDV * (mL/m2)                      |\n| rvesvi    | 14    | 36    | RV ESV * (mL/m2)                      |\n| rvedv     | 77    | 162   | RV EDV Absolute (mL)                  |\n| rvesv     | 22    | 65    | RV ESV Absolute (mL)                  |\n| rvsv      | 47    | 104   | RV Stroke Volume (mL)                 |\n| rvef      | 53    | 75    | RV Ejection Fraction (%)              |\n================================================================================\n\n[ LV DIAMETRE (bSSFP) ]\n\n--- MALE: LV Diameters ---\n\nParameter                             | LL-UL\n--------------------------------------+-------\nLV end-diastolic 4ch (mm)             | 39-59\nLV end-diastolic SAX (mm)             | 44-61\nLV end-systolic 4ch (mm)              | 26-38\nLV end-systolic SAX (mm)              | 28-40\nLV end-diastolic 4ch/BSA (mm/m2)      | 18-34\nLV end-diastolic SAX/BSA (mm/m2)      | 20-32\nLV end-systolic 4ch/BSA (mm/m2)       | 13-21\n\n--- FEMALE: LV Diameters ---\n\nParameter                             | LL-UL\n--------------------------------------+-------\nLV end-diastolic 4ch (mm)             | 36-56\nLV end-diastolic SAX (mm)             | 40-56\nLV end-systolic 4ch (mm)              | 16-40\nLV end-systolic SAX (mm)              | 23-39\nLV end-diastolic 4ch/BSA (mm/m2)      | 19-35\nLV end-diastolic SAX/BSA (mm/m2)      | 24-40\nLV end-systolic 4ch/BSA (mm/m2)       | 9-25\n\n================================================================================\n\n[ VENSTRE ATRIUM VOLUMEN ]\n\n--- MALE BI-PLANE (APPENDAGE EXCLUDED) ---\n\n| la_max    | 26    | 110   | LA Max Volume Absolute (mL)           |\n| la_max_i  | 16    | 56    | LA Max Volume * (mL/m2)               |\n\n--- MALE SIMPSON'S (APPENDAGE INCLUDED) ---\n\n| la_max    | 40    | 111   | LA Max Volume Absolute (mL)           |\n| la_max_i  | 25    | 56    | LA Max Volume * (mL/m2)               |\n\n--- FEMALE BI-PLANE (APPENDAGE EXCLUDED) ---\n\n| la_max    | 26    | 94    | LA Max Volume Absolute (mL)           |\n| la_max_i  | 18    | 54    | LA Max Volume * (mL/m2)               |\n\n--- FEMALE SIMPSON'S (APPENDAGE INCLUDED) ---\n\n| la_max    | 38    | 93    | LA Max Volume Absolute (mL)           |\n| la_max_i  | 25    | 56    | LA Max Volume * (mL/m2)               |\n\n================================================================================\n"</script>
+
 
 <h1 id="headline">Hjerte-MR-skabelon &#129522 -Beta </h1>
 <input type="text" id="nameInput" placeholder="Id dokument">
@@ -69,6 +117,11 @@ canvas { cursor: pointer; max-width: 100%; }
 <button type="button" class="collapsible">I. Sektion målinger</button>
 <div class="content">
 <h2>Indtast målinger og data</h2>
+<div class="stress-row">
+  <span>Hvile</span>
+  <label class="stress-switch"><input type="checkbox" id="stressToggle"><span class="stress-slider"></span></label>
+  <span>Stress (cine-mål under regadenoson)</span>
+</div>
 <div id="measureDiv">
   <div class="row">
    <div class="col-25"><input type="number" id="num1" placeholder="Alder" class="highlight"></div>
@@ -170,9 +223,9 @@ canvas { cursor: pointer; max-width: 100%; }
  </div>
  <div class="col-50">
   <label>Aorta insufficiens:</label>
-  <input type="text" id="select4" list="dl-select4" placeholder="Ingen aortainsufficiens">
+  <input type="text" id="select4" list="dl-select4" placeholder="Ingen betydende aortainsufficiens">
 <datalist id="dl-select4">
-  <option value="Ingen aortainsufficiens">
+  <option value="Ingen betydende aortainsufficiens">
   <option value="Let aortainsufficiens">
   <option value="Moderat aortainsufficiens">
   <option value="Svær aortainsufficiens">
@@ -182,9 +235,9 @@ canvas { cursor: pointer; max-width: 100%; }
 <div class="row">
  <div class="col-50">
   <label>Mitralklappen:</label>
-  <input type="text" id="select5" list="dl-select5" placeholder="Ingen mitralinsufficiens">
+  <input type="text" id="select5" list="dl-select5" placeholder="Ingen betydende mitralinsufficiens">
 <datalist id="dl-select5">
-  <option value="Ingen mitralinsufficiens">
+  <option value="Ingen betydende mitralinsufficiens">
   <option value="Let insufficient mitralklap">
   <option value="Moderat insufficient mitralklap">
   <option value="Svær insufficient mitralklap">
@@ -275,9 +328,9 @@ canvas { cursor: pointer; max-width: 100%; }
 <div class="row">
  <div class="col-50">
   <label>Tricuspedalklappen:</label>
-  <input type="text" id="select12" list="dl-select12" placeholder="Ingen tricuspedalinsufficiens">
+  <input type="text" id="select12" list="dl-select12" placeholder="Ingen betydende tricuspedalinsufficiens">
 <datalist id="dl-select12">
-  <option value="Ingen tricuspedalinsufficiens">
+  <option value="Ingen betydende tricuspedalinsufficiens">
   <option value="Let tricuspedalinsufficiens">
   <option value="Moderat tricuspedalinsufficiens">
   <option value="Svært tricuspedalinsufficiens">
@@ -708,72 +761,89 @@ function handleSubmit(){
   const lvdRef=sex==='M'?{lvid:'[Ref: 44-61]',lvis:'[Ref: 28-40]',lvidi:'[Ref: 20-32]',lvisi:'[Ref: 13-21]'}:{lvid:'[Ref: 40-56]',lvis:'[Ref: 23-39]',lvidi:'[Ref: 24-40]',lvisi:'[Ref: 9-25]'};
   const laRef=sex==='M'?'[Ref: 40-111]':'[Ref: 38-93]';
   const laRefI='[Ref: 25-56]';
+  // Grouped output: a heading is printed only if at least one value in the group exists.
+  const ok=v=>!isNaN(v);
+  const sec=(title,lines)=>{const l=lines.filter(Boolean);return l.length?(title?`${title}<br>`:'')+l.map(x=>x+'<br>').join('')+'<br>':'';};
   var outputText="MÅLINGER (Ref. SCMR2025) OG BIOMETRISKE DATA<br><br>";
-  if(!isNaN(num1))outputText+=`Alder: ${num1} år.<br>`;
-  if(!isNaN(num2))outputText+=`Højde: ${num2} cm.<br>`;
-  if(!isNaN(num3))outputText+=`Vægt: ${num3} kg.<br>`;
-  if(!isNaN(num4))outputText+=`Puls: ${num4}.<br>`;
-  if(!isNaN(BSA))outputText+=`BSA: ${BSA} m2.<br><br>`;
-  if(!isNaN(num5))outputText+=`Aorta(s): ${num5} mm.<br>`;
-  if(!isNaN(num6))outputText+=`LA area (4k): ${num6} cm2.<br>`;
-  if(!isNaN(num7))outputText+=`LA area (2k): ${num7} cm2.<br>`;
-  if(!isNaN(VA))outputText+=`VA vol (biplan): ${VA} ml ${laRef}.<br>`;
-  if(!isNaN(VAi))outputText+=`VA vol* (biplan): ${VAi} ml/m2 ${laRefI}.<br>`;
-  if(!isNaN(num31))outputText+=`VA max: ${num31} ml ${laRef}.<br>`;
-  if(!isNaN(LAmaxi))outputText+=`VA max*: ${LAmaxi} ml/m2 ${laRefI}.<br>`;
-  if(!isNaN(num33))outputText+=`HA max: ${num33} ml.<br>`;
-  if(!isNaN(RAmaxi))outputText+=`HA max*: ${RAmaxi} ml/m2.<br>`;
-  outputText+=`<br>`;
-  if(!isNaN(num9))outputText+=`LVID: ${num9} mm ${lvdRef.lvid}.<br>`;
-  if(!isNaN(LVIDi))outputText+=`LVID*: ${LVIDi} mm/m2 ${lvdRef.lvidi}.<br>`;
-  if(!isNaN(num10))outputText+=`LVIS: ${num10} mm ${lvdRef.lvis}.<br>`;
-  if(!isNaN(LVISi))outputText+=`LVIS*: ${LVISi} mm/m2 ${lvdRef.lvisi}.<br>`;
-  if(!isNaN(num11))outputText+=`IVD: ${num11} mm [Ref: <13].<br>`;
-  if(!isNaN(num12))outputText+=`RVID: ${num12} mm.<br><br>`;
-  if(!isNaN(num13))outputText+=`EDV: ${num13} ml ${getRef(sex,num1,'lvedv')}.<br>`;
-  if(!isNaN(LVDvoli))outputText+=`EDV*: ${LVDvoli} ml/m2 ${getRef(sex,num1,'lvedvi')}.<br>`;
-  if(!isNaN(num14))outputText+=`ESV: ${num14} ml ${getRef(sex,num1,'lvesv')}.<br>`;
-  if(!isNaN(LVSvoli))outputText+=`ESV*: ${LVSvoli} ml/m2 ${getRef(sex,num1,'lvesvi')}.<br>`;
-  if(!isNaN(LVEF))outputText+=`LVEF: ${LVEF} % ${getRef(sex,num1,'lvef')}.<br>`;
-  if(!isNaN(SV))outputText+=`SV: ${SV} ml ${getRef(sex,num1,'lvsv')}.<br>`;
-  if(!isNaN(SVI))outputText+=`SVI: ${SVI} ml/m2 ${getRef(sex,num1,'svi')}.<br>`;
-  if(!isNaN(CO))outputText+=`CO: ${CO} l/min ${getRef(sex,num1,'co')}.<br>`;
-  if(!isNaN(CI))outputText+=`CI: ${CI} l/min/m2 ${getRef(sex,num1,'ci')}.<br>`;
-  if(!isNaN(num17))outputText+=`LVma: ${num17} gram.<br>`;
-  if(!isNaN(Mi))outputText+=`LVma*: ${Mi} g/m2 ${getRef(sex,num1,'lvmi')}.<br><br>`;
-  if(!isNaN(num15))outputText+=`RV-EDV: ${num15} ml ${getRef(sex,num1,'rvedv')}.<br>`;
-  if(!isNaN(RVDvoli))outputText+=`RV-EDV*: ${RVDvoli} ml/m2 ${getRef(sex,num1,'rvedvi')}.<br>`;
-  if(!isNaN(num16))outputText+=`RV-ESV: ${num16} ml ${getRef(sex,num1,'rvesv')}.<br>`;
-  if(!isNaN(RVSvoli))outputText+=`RV-ESV*: ${RVSvoli} ml/m2 ${getRef(sex,num1,'rvesvi')}.<br>`;
-  if(!isNaN(RVEF))outputText+=`RVEF: ${RVEF} % ${getRef(sex,num1,'rvef')}.<br>`;
-  if(!isNaN(SVrv))outputText+=`SVrv: ${SVrv} ml ${getRef(sex,num1,'rvsv')}.<br>`;
-  if(!isNaN(SVIrv))outputText+=`SVI-RV: ${SVIrv} ml/m2.<br>`;
-  if(!isNaN(COrv))outputText+=`CO-RV: ${COrv} l/min.<br>`;
-  if(!isNaN(CIrv))outputText+=`CI-RV: ${CIrv} l/min/m2.<br><br>`;
-  if(!isNaN(num18))outputText+=`AOvenc: ${num18}.<br>`;
-  if(!isNaN(num19))outputText+=`AO-Qflow forward: ${num19} ml.<br>`;
-  if(!isNaN(num20))outputText+=`AO-Qflow reverse: ${num20} ml.<br>`;
-  if(!isNaN(Qn))outputText+=`AO-Qflow net: ${Qn} ml.<br>`;
-  if(!isNaN(num24a))outputText+=`HR AO-Qflow: ${num24a} bpm.<br>`;
-  if(!isNaN(Qco))outputText+=`AO-Qflow net CO: ${Qco} L/min.<br>`;
-  if(!isNaN(RFv))outputText+=`RF A-klap: ${RFv}%.<br>`;
-  if(!isNaN(MRao))outputText+=`MR vol (LV-SV−AO-net): ${MRao} ml.<br><br>`;
-  if(!isNaN(num21))outputText+=`TPvenc: ${num21}.<br>`;
-  if(!isNaN(num22))outputText+=`TP-Qflow forward: ${num22} ml.<br>`;
-  if(!isNaN(num23))outputText+=`TP-Qflow reverse: ${num23} ml.<br>`;
-  if(!isNaN(Qpn))outputText+=`TP-Qflow net: ${Qpn} ml.<br>`;
-  if(!isNaN(num24b))outputText+=`HR TP-Qflow: ${num24b} bpm.<br>`;
-  if(!isNaN(Qpco))outputText+=`TP-Qflow net CO: ${Qpco} L/min.<br>`;
-  if(!isNaN(RFh))outputText+=`RF P-klap: ${RFh}%.<br>`;
-  if(!isNaN(MRtp))outputText+=`MR vol (LV-SV−TP-net): ${MRtp} ml.<br>`;
-  if(!isNaN(Q))outputText+=`Shunt Qp:Qs: ${Q}.<br><br>`;
-  if(!isNaN(num25))outputText+=`T1 nativ: ${num25}.<br>`;
-  if(!isNaN(num26))outputText+=`T2 nativ: ${num26}.<br>`;
-  if(!isNaN(num27))outputText+=`T1*: ${num27}.<br>`;
-  if(!isNaN(num28))outputText+=`Hæmatokrit: ${num28}.<br>`;
-  if(!isNaN(num29))outputText+=`T1 blod nativ: ${num29}.<br>`;
-  if(!isNaN(num30))outputText+=`T1 blod*: ${num30}.<br>`;
-  if(!isNaN(ECV))outputText+=`ECV: ${ECV}.<br>`;
+  outputText+=sec('',[
+    ok(num1)&&`Alder: ${num1} år.`,
+    ok(num2)&&`Højde: ${num2} cm.`,
+    ok(num3)&&`Vægt: ${num3} kg.`,
+    ok(num4)&&`Puls: ${num4}.`,
+    ok(BSA)&&`BSA: ${BSA} m2.`
+  ]);
+  outputText+=sec('2D MÅL (≈ EKKO PROJEKTIONER):',[
+    ok(num5)&&`Aorta(s): ${num5} mm.`,
+    ok(num6)&&`LA area (4k): ${num6} cm2.`,
+    ok(num7)&&`LA area (2k): ${num7} cm2.`,
+    ok(VA)&&`VA vol (biplan): ${VA} ml ${laRef}.`,
+    ok(VAi)&&`VA vol* (biplan): ${VAi} ml/m2 ${laRefI}.`,
+    ok(num31)&&`VA max: ${num31} ml ${laRef}.`,
+    ok(LAmaxi)&&`VA max*: ${LAmaxi} ml/m2 ${laRefI}.`,
+    ok(num33)&&`HA max: ${num33} ml.`,
+    ok(RAmaxi)&&`HA max*: ${RAmaxi} ml/m2.`,
+    ok(num9)&&`LVID: ${num9} mm ${lvdRef.lvid}.`,
+    ok(LVIDi)&&`LVID*: ${LVIDi} mm/m2 ${lvdRef.lvidi}.`,
+    ok(num10)&&`LVIS: ${num10} mm ${lvdRef.lvis}.`,
+    ok(LVISi)&&`LVIS*: ${LVISi} mm/m2 ${lvdRef.lvisi}.`,
+    ok(num11)&&`IVD: ${num11} mm [Ref: <13].`,
+    ok(num12)&&`RVID: ${num12} mm.`
+  ]);
+  outputText+=sec('VENSTRE VENTR. OG AFLEDTE MÅL:',[
+    ok(num13)&&`EDV: ${num13} ml ${getRef(sex,num1,'lvedv')}.`,
+    ok(LVDvoli)&&`EDV*: ${LVDvoli} ml/m2 ${getRef(sex,num1,'lvedvi')}.`,
+    ok(num14)&&`ESV: ${num14} ml ${getRef(sex,num1,'lvesv')}.`,
+    ok(LVSvoli)&&`ESV*: ${LVSvoli} ml/m2 ${getRef(sex,num1,'lvesvi')}.`,
+    ok(LVEF)&&`LVEF: ${LVEF} % ${getRef(sex,num1,'lvef')}.`,
+    ok(SV)&&`SV: ${SV} ml ${getRef(sex,num1,'lvsv')}.`,
+    ok(SVI)&&`SVI: ${SVI} ml/m2 ${getRef(sex,num1,'svi')}.`,
+    ok(CO)&&`CO: ${CO} l/min ${getRef(sex,num1,'co')}.`,
+    ok(CI)&&`CI: ${CI} l/min/m2 ${getRef(sex,num1,'ci')}.`,
+    ok(num17)&&`LVma: ${num17} gram.`,
+    ok(Mi)&&`LVma*: ${Mi} g/m2 ${getRef(sex,num1,'lvmi')}.`
+  ]);
+  outputText+=sec('HØJRE VENTR. OG AFLEDTE MÅL:',[
+    ok(num15)&&`RV-EDV: ${num15} ml ${getRef(sex,num1,'rvedv')}.`,
+    ok(RVDvoli)&&`RV-EDV*: ${RVDvoli} ml/m2 ${getRef(sex,num1,'rvedvi')}.`,
+    ok(num16)&&`RV-ESV: ${num16} ml ${getRef(sex,num1,'rvesv')}.`,
+    ok(RVSvoli)&&`RV-ESV*: ${RVSvoli} ml/m2 ${getRef(sex,num1,'rvesvi')}.`,
+    ok(RVEF)&&`RVEF: ${RVEF} % ${getRef(sex,num1,'rvef')}.`,
+    ok(SVrv)&&`SVrv: ${SVrv} ml ${getRef(sex,num1,'rvsv')}.`,
+    ok(SVIrv)&&`SVI-RV: ${SVIrv} ml/m2.`,
+    ok(COrv)&&`CO-RV: ${COrv} l/min.`,
+    ok(CIrv)&&`CI-RV: ${CIrv} l/min/m2.`
+  ]);
+  outputText+=sec('AORTA-ASCENDENS FLOW / FASEKONTRAST:',[
+    ok(num18)&&`AOvenc: ${num18}.`,
+    ok(num19)&&`AO-Qflow forward: ${num19} ml.`,
+    ok(num20)&&`AO-Qflow reverse: ${num20} ml.`,
+    ok(Qn)&&`AO-Qflow net: ${Qn} ml.`,
+    ok(num24a)&&`HR AO-Qflow: ${num24a} bpm.`,
+    ok(Qco)&&`AO-Qflow net CO: ${Qco} L/min.`,
+    ok(RFv)&&`RF A-klap: ${RFv}%.`,
+    ok(MRao)&&`MR vol (LV-SV−AO-net): ${MRao} ml.`
+  ]);
+  outputText+=sec('TRUNKUS PULMONALIS FLOW / FASEKONTRAST:',[
+    ok(num21)&&`TPvenc: ${num21}.`,
+    ok(num22)&&`TP-Qflow forward: ${num22} ml.`,
+    ok(num23)&&`TP-Qflow reverse: ${num23} ml.`,
+    ok(Qpn)&&`TP-Qflow net: ${Qpn} ml.`,
+    ok(num24b)&&`HR TP-Qflow: ${num24b} bpm.`,
+    ok(Qpco)&&`TP-Qflow net CO: ${Qpco} L/min.`,
+    ok(RFh)&&`RF P-klap: ${RFh}%.`,
+    ok(MRtp)&&`MR vol (LV-SV−TP-net): ${MRtp} ml.`,
+    ok(Q)&&`Shunt Qp:Qs: ${Q}.`
+  ]);
+  outputText+=sec('',[
+    ok(num25)&&`T1 nativ: ${num25}.`,
+    ok(num26)&&`T2 nativ: ${num26}.`,
+    ok(num27)&&`T1*: ${num27}.`,
+    ok(num28)&&`Hæmatokrit: ${num28}.`,
+    ok(num29)&&`T1 blod nativ: ${num29}.`,
+    ok(num30)&&`T1 blod*: ${num30}.`,
+    ok(ECV)&&`ECV: ${ECV}.`
+  ]);
+  outputText+='='.repeat(60)+'<br>';
   document.getElementById('output20').innerHTML=outputText;
 }
 
@@ -814,7 +884,13 @@ function updateSupp(){
     {id:"myText17",heading:"KONKLUSION:",ph:""}
   ];
   let out='';
-  fields.forEach(f=>{const val=document.getElementById(f.id).value||f.ph;out+=`<br>${f.heading}<br>${val}<br>`;});
+  const stressOn=document.getElementById('stressToggle').checked;
+  const STRESS_NOTE='LVEF-beregning under regadenoson er generelt højere end i hviletilstand og kan ikke sammenlignes 1:1.';
+  fields.forEach(f=>{
+    let val=document.getElementById(f.id).value||f.ph;
+    if(stressOn&&f.id==='myText17') val=[val,STRESS_NOTE].filter(Boolean).join(' ');
+    out+=`<br>${f.heading}<br>${val}<br>`;
+  });
   out+=`<br>MR modaliteterne er ikke opført i kronologisk rækkefølge.`;
   document.getElementById("output66").innerHTML=out;
 }
@@ -825,6 +901,7 @@ document.getElementById('select13').addEventListener('input',updateCINE);
 ['myText11','myText12','myText13','myText14','myText15','myText16','myText17']
 .forEach(id=>document.getElementById(id).addEventListener('input',updateSupp));
 
+document.getElementById('stressToggle').addEventListener('change',updateSupp);
 updateCINE();
 updateSupp();
 
@@ -862,10 +939,47 @@ document.querySelectorAll('.copyButton').forEach(function(button){
 });
 
 function openRefPopup(){
-  const asciiText=`================================================================================\n| PARAMETER | LL    | UL    | DESCRIPTION                           |\n================================================================================\n[ MEN - LEFT VENTRICLE ]\n--- MALE AGE 20 LV ---\n| lvedvi    | 48    | 108   | LV EDV * (mL/m2)                      |\n| lvesvi    | 11    | 44    | LV ESV * (mL/m2)                      |\n| lvef      | 50    | 78    | LV Ejection Fraction (%)              |\n| lvmi      | 47    | 91    | LV Mass * (g/m2)                      |\n| svi       | 28    | 72    | LV Stroke Vol * (mL/m2)               |\n================================================================================`;
-  const refWin=window.open("","refWindow","width=800,height=600");
-  refWin.document.write(`<html><head><title>Reference</title></head><body><pre style="font-family:monospace;white-space:pre;">${asciiText}</pre></body></html>`);
-  refWin.document.close();
+  // LIFEBOAT GUARD: reference data lives in its own isolated block
+  // (#scmr-ref-data), never inline here, so edits to this function
+  // or the surrounding tool can never silently truncate it.
+  //
+  // Rendered as an in-page overlay rather than window.open(), because
+  // window.open() is unreliable/blocked under locked-down institutional
+  // browser policy (no admin rights) — an in-DOM overlay cannot be
+  // popup-blocked.
+  const MIN_EXPECTED_ROWS = 200; // full table has 213 data rows
+  const dataEl = document.getElementById('scmr-ref-data');
+  const box = document.getElementById('refOverlayBox');
+  const content = document.getElementById('refOverlayContent');
+  let asciiText = '';
+  let rowCount = 0;
+
+  if (dataEl) {
+    try {
+      asciiText = JSON.parse(dataEl.textContent);
+      rowCount = (asciiText.match(/^\|\s/gm) || []).length;
+    } catch(e) {
+      asciiText = '';
+    }
+  }
+
+  if (!dataEl || rowCount < MIN_EXPECTED_ROWS) {
+    box.classList.add('error');
+    content.textContent =
+      `⚠ REFERENCE TABLE INCOMPLETE — DO NOT USE\n\n` +
+      `Expected at least ${MIN_EXPECTED_ROWS} data rows, found ${rowCount}.\n` +
+      `The #scmr-ref-data block is missing or has been truncated. Do not rely on ` +
+      `any values shown elsewhere in this tool until this is restored from a known-good copy.`;
+  } else {
+    box.classList.remove('error');
+    content.textContent = asciiText;
+  }
+
+  document.getElementById('refOverlay').classList.add('open');
+}
+
+function closeRefOverlay(){
+  document.getElementById('refOverlay').classList.remove('open');
 }
 
 document.getElementById('activateBtn').addEventListener('click',function(){
